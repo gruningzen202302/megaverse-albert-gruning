@@ -1,0 +1,274 @@
+{
+	"info": {
+		"_postman_id": "e6bdc256-29c0-4234-a13c-5c037c775f0e",
+		"name": "crossmint",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11510696"
+	},
+	"item": [
+		{
+			"name": "polyanets-post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"candidateId\":\"{{candidateId}}\",\n    \"row\":10,\n    \"column\":10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/{{polyanets}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"{{polyanets}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "polyanets-post",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"candidateId\": \"d7e13a9a-1e20-4b35-a594-630ec4bfb9a9\",\n    \"row\":0,\n    \"column\":10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://challenge.crossmint.io/api/polyanets",
+							"protocol": "https",
+							"host": [
+								"challenge",
+								"crossmint",
+								"io"
+							],
+							"path": [
+								"api",
+								"polyanets"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "JSON",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"type": "text"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "public, max-age=0, must-revalidate",
+							"type": "text"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"type": "text"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Oct 2023 02:18:17 GMT",
+							"type": "text"
+						},
+						{
+							"key": "Etag",
+							"value": "\"bwc9mymkdm2\"",
+							"type": "text"
+						},
+						{
+							"key": "Server",
+							"value": "Vercel",
+							"type": "text"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=63072000",
+							"type": "text"
+						},
+						{
+							"key": "X-Matched-Path",
+							"value": "/api/polyanets",
+							"type": "text"
+						},
+						{
+							"key": "X-Vercel-Cache",
+							"value": "MISS",
+							"type": "text"
+						},
+						{
+							"key": "X-Vercel-Id",
+							"value": "gru1::iad1::5b8v4-1697336297167-2de6a2166d1b",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		},
+		{
+			"name": "polyanets-delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"candidateId\":\"d7e13a9a-1e20-4b35-a594-630ec4bfb9a9\",\n    \"row\":0,\n    \"column\":10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://challenge.crossmint.io/api/polyanets",
+					"protocol": "https",
+					"host": [
+						"challenge",
+						"crossmint",
+						"io"
+					],
+					"path": [
+						"api",
+						"polyanets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "soloons-post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"candidateId\":\"{{candidateId}}\",\n    \"row\":10,\n    \"column\":10,\n    \"color\":\"blue\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/soloons/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"soloons",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "soloons-delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"candidateId\":\"{{candidateId}}\",\n    \"row\":10,\n    \"column\":10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/soloons/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"soloons",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "coments-post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"candidateId\":\"{{candidateId}}\",\n    \"row\":10,\n    \"column\":10,\n    \"direction\":\"up\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/comeths",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"comeths"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "comeths-delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"candidateId\":\"{{candidateId}}\",\n    \"row\":10,\n    \"column\":10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/comeths",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"comeths"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
