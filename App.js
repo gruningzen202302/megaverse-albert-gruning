@@ -13,9 +13,7 @@ import { useState, useEffect } from "react"
 import DrawStrategy from "./draw"
 import Emoji from "./assets/emojiPixels"
 import Api from "./assets/api"
-
-const columns = 11
-const rows = 11
+import Model from "./model"
 
 let matrix = []
 
@@ -30,19 +28,21 @@ const drawLine = (emoji, columns) => {
   return line
 }
 
-const milkyLine = drawLine(Emoji.milky, columns)
-const planetLine = drawLine(Emoji.planet, columns)
+const milkyLine = drawLine(Emoji.milky, Model.columns)
+const planetLine = drawLine(Emoji.planet, Model.columns)
 
 const drawGrid = (rowCount, lines, columns) => {
   let grid = []
-  DrawStrategy.draw(rows, grid, lines, columns)
+  DrawStrategy.draw(Model.rows, grid, lines, Model.columns)
   return grid
 }
 const title = "MEGAVERSE"
 
-const grid = drawGrid(rows, [milkyLine, planetLine], columns)
+const grid = drawGrid(Model.rows, [milkyLine, planetLine], Model.columns)
 
 export default function App() {
+  let [row, setRow] = useState(0)
+  let [column, setColumn] = useState(0)
   let [isLoading, setIsLoading] = useState(true)
   let [error, setError] = useState()
   let [response, setResponse] = useState()
@@ -85,11 +85,13 @@ export default function App() {
           placeholder="Row "
           keyboardType="numeric"
           style={styles.input}
+          onChangeText={(value) => setRow(value)}
         ></TextInput>
         <TextInput
           placeholder="Column "
           keyboardType="numeric"
           style={styles.input}
+          onChangeText={(value) => setColumn(value)}
         ></TextInput>
       </View>
       <Text style={styles.text}>{grid}</Text>

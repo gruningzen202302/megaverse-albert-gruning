@@ -6,8 +6,13 @@ const baseUrl = "https://challenge.crossmint.io/api"
 const polyanets = "polyanets"
 const soloons = "soloons"
 const comeths = "comeths"
+const rows = 11
+const columns = 11
 
 const Model = {
+  rows: rows,
+  columns: columns,
+
   polyanets: {
     candidateId: candidateId.toString(),
     row: 10,
@@ -27,3 +32,5 @@ const Model = {
     direction: Emoji.up.toString(),
   },
 }
+
+export default Model
