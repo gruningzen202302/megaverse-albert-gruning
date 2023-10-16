@@ -1,5 +1,11 @@
 import { StatusBar } from "expo-status-bar"
-import { StyleSheet, Text, View , ActivityIndicator} from "react-native"
+import {
+  StyleSheet,
+  Text,
+  View,
+  ActivityIndicator,
+  TextInput,
+} from "react-native"
 import { useState, useEffect } from "react"
 
 import DrawStrategy from "./draw"
@@ -72,6 +78,10 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{title}</Text>
+      <View style={{ flexDirection: "row" }}>
+        <TextInput placeholder="Row " style={styles.input}></TextInput>
+        <TextInput placeholder="Column " style={styles.input}></TextInput>
+      </View>
       <Text style={styles.text}>{grid}</Text>
       {getContent()}
       <StatusBar style="auto" />
@@ -92,5 +102,14 @@ const styles = StyleSheet.create({
     color: "#FFD700",
     fontSize: 15,
     fontWeight: "bold",
+  },
+  input: {
+    //alignSelf: "stretch",
+    width: "50%",
+    margin: 8,
+    padding: 4,
+    backgroundColor: "#ccc",
+    fontWeight: "bold",
+    fontSize: 15,
   },
 })
