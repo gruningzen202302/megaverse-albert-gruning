@@ -5,6 +5,8 @@ import {
   View,
   ActivityIndicator,
   TextInput,
+  Button,
+  Alert,
 } from "react-native"
 import { useState, useEffect } from "react"
 
@@ -79,11 +81,33 @@ export default function App() {
     <View style={styles.container}>
       <Text style={styles.text}>{title}</Text>
       <View style={{ flexDirection: "row" }}>
-        <TextInput placeholder="Row " style={styles.input}></TextInput>
-        <TextInput placeholder="Column " style={styles.input}></TextInput>
+        <TextInput
+          placeholder="Row "
+          keyboardType="numeric"
+          style={styles.input}
+        ></TextInput>
+        <TextInput
+          placeholder="Column "
+          keyboardType="numeric"
+          style={styles.input}
+        ></TextInput>
       </View>
       <Text style={styles.text}>{grid}</Text>
       {getContent()}
+      <View style={{ flexDirection: "row" }}>
+        <Button
+          title="Delete"
+          color="red"
+          margin="15"
+          padding="15"
+          onPress={() => Alert.alert("R U sure ?")}
+        />
+        <Button
+          title="Post"
+          style={styles.button}
+          onPress={() => Alert.alert("P O S T")}
+        ></Button>
+      </View>
       <StatusBar style="auto" />
     </View>
   )
