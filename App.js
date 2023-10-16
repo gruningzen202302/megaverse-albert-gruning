@@ -35,21 +35,28 @@ const planetLine = drawLine(emoji.planet, columns)
 const drawStrategy = (rowCount, grid, lines, columnCount) => {
   rowCount = 10
   columnCount = 10
-  const columnOffset = columnCount + 1
+  const columnOffset = columnCount //+ 1
   const half = Math.floor(columnCount / 2)
+
   for (let row = 0; row < rowCount; row++) {
     grid[row] = []
     for (let column = 0; column < columnCount; column++) {
-      let oppositeColumn = columnOffset - column
+      grid[row][column] = emoji.milky
+    }
+  }
+  for (let row = 0; row < half; row++) {
+    for (let column = 0; column < half; column++) {
+      let opposite = columnOffset - 1 - column
       if (row === column) {
         grid[row][column] = emoji.planet
-        
-      } else {
-        grid[row][column] = emoji.milky
+        grid[row][opposite] = emoji.planet
+        grid[opposite][column] = emoji.planet
+        grid[opposite][opposite] = emoji.planet
       }
     }
   }
 }
+
 const drawGrid = (rowCount, lines, columns) => {
   let grid = []
   drawStrategy(rows, grid, lines, columns)
