@@ -37,6 +37,7 @@ const drawStrategy = (rowCount, grid, lines, columnCount) => {
   columnCount = 10
   const columnOffset = columnCount //+ 1
   const half = Math.floor(columnCount / 2)
+  const margin = 1
 
   for (let row = 0; row < rowCount; row++) {
     grid[row] = []
@@ -47,7 +48,9 @@ const drawStrategy = (rowCount, grid, lines, columnCount) => {
   for (let row = 0; row < half; row++) {
     for (let column = 0; column < half; column++) {
       let opposite = columnOffset - 1 - column
-      if (row === column) {
+      const conditionsForTheShape =
+        row === column && column > margin && row > margin
+      if (conditionsForTheShape) {
         grid[row][column] = emoji.planet
         grid[row][opposite] = emoji.planet
         grid[opposite][column] = emoji.planet
