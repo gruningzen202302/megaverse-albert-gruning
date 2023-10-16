@@ -1,14 +1,4 @@
-const milky = "\u{1F30C}"
-const planet = "\u{1FA90}"
-const purple = "\u{1F7E3}"
-const yellow = "\u{1F7E1}"
-
-const emoji = {
-  milky: milky,
-  planet: planet,
-  purple: purple,
-  yellow: yellow,
-}
+import Emoji from "./assets/emojiPixels"
 
 let DrawStrategy = {
   draw: (rowCount, grid, lines, columnCount) => {
@@ -19,7 +9,7 @@ let DrawStrategy = {
     for (let row = 0; row < rowCount; row++) {
       grid[row] = []
       for (let column = 0; column < columnCount; column++) {
-        grid[row][column] = emoji.milky
+        grid[row][column] = Emoji.milky
       }
     }
     for (let row = 0; row < half; row++) {
@@ -28,14 +18,14 @@ let DrawStrategy = {
         const conditionsForTheShape =
           row === column && column > margin && row > margin
         if (conditionsForTheShape) {
-          grid[row][column] = emoji.planet
-          grid[row][opposite] = emoji.planet
-          grid[opposite][column] = emoji.planet
-          grid[opposite][opposite] = emoji.planet
+          grid[row][column] = Emoji.planet
+          grid[row][opposite] = Emoji.planet
+          grid[opposite][column] = Emoji.planet
+          grid[opposite][opposite] = Emoji.planet
         }
       }
     }
-    grid[half][half] = emoji.planet
+    grid[half][half] = Emoji.planet
   },
 }
 export default DrawStrategy

@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar"
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, Text, View , ActivityIndicator} from "react-native"
 import DrawStrategy from "./draw"
+import { useState , useEffect} from "react"
 
 const milky = "\u{1F30C}"
 const planet = "\u{1FA90}"
@@ -42,6 +43,13 @@ const title = "MEGAVERSE"
 
 const grid = drawGrid(rows, [milkyLine, planetLine], columns)
 export default function App() {
+  let [isLoading, setIsLoading] = useState(false)
+  let [error, setError]= useState()
+  let [response, setResponse] = useState()
+
+  const getContent =()=>{
+    return <ActivityIndicator size="large"/>
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{title}</Text>
