@@ -1,12 +1,16 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 
-const milky = "\u{1F30C}";
+const milky = "\u{1F30C}"
 const planet = "\u{1FA90}"
+const purple = "\u{1F7E3}"
+const yellow = "\u{1F7E1}"
 
 const emoji = {
   milky: milky,
   planet: planet,
+  purple: purple,
+  yellow: yellow,
 }
 
 const columns = 11
@@ -28,22 +32,31 @@ const drawLine = (emoji, columns) => {
 const milkyLine = drawLine(emoji.milky, columns)
 const planetLine = drawLine(emoji.planet, columns)
 
-const drawStrategy = (rowCount, grid, lines) => {
-  for (let rawPosition = 0; rawPosition < rowCount; rawPosition++) {
-    if (rawPosition % 2 === 0) {
-      drawRaw(grid, lines[0])
-    } else {
-      drawRaw(grid, lines[1])
+const drawStrategy = (rowCount, grid, lines, columns) => {
+  for (let row = 0; row < rowCount; row++) {
+    grid[row] = []
+    for (let column = 0; column < columns; column++) {
+      grid[row][column] = emoji.milky
     }
   }
+
+  // for (let rawPosition = 0; rawPosition < rowCount; rawPosition++) {
+  //   lines[0][0] = emoji.purple
+  //   lines[0][1] = emoji.yellow
+  //   if (rawPosition % 2 === 0) {
+  //     drawRaw(grid, lines[0])
+  //   } else {
+  //     drawRaw(grid, lines[1])
+  //   }
+  // }
 }
-const drawGrid = (rowCount, lines) => {
+const drawGrid = (rowCount, lines, columns) => {
   let grid = []
-  drawStrategy(rows, grid, lines)
+  drawStrategy(rows, grid, lines, columns)
   return grid
 }
-const grid = drawGrid(rows, [milkyLine, planetLine])
 
+const grid = drawGrid(rows, [milkyLine, planetLine], columns)
 export default function App() {
   return (
     <View style={styles.container}>
