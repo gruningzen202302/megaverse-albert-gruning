@@ -59,12 +59,13 @@ export default function App() {
       return <ActivityIndicator size="large" />
     }
     if (error) {
+      console.log(error)
       return <Text style={{ color: "red" }}>{error?.toString()}</Text>
     }
-    console.log("API response" + response["bpi"]["USD"].rate)
+    console.log("API response" + response?.bpi?.USD?.rate)
     return (
-      <Text style={{ color: "magenta" }}>
-        API GET called + {response["bpi"]["USD"].rate}
+      <Text style={{ color: "#ccc" }}>
+        API GET called + {response?.bpi?.USD?.rate}
       </Text>
     )
   }
