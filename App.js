@@ -33,10 +33,13 @@ const milkyLine = drawLine(emoji.milky, columns)
 const planetLine = drawLine(emoji.planet, columns)
 
 const drawStrategy = (rowCount, grid, lines, columns) => {
+  const columnOffset = columns + 1
   for (let row = 0; row < rowCount; row++) {
     grid[row] = []
-    for (let column = 0; column < columns; column++) {
+    for (let column = 0; column < Math.floor(columns / 2); column++) {
+      let oppositeColumn = columnOffset - column
       grid[row][column] = emoji.milky
+      grid[row][oppositeColumn] = emoji.planet
     }
   }
 
