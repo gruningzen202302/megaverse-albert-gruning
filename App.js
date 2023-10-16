@@ -56,7 +56,7 @@ const drawStrategy = (rowCount, grid, lines, columnCount) => {
       }
     }
   }
-  grid[5][5] = emoji.planet
+  grid[half][half] = emoji.planet
 }
 
 const drawGrid = (rowCount, lines, columns) => {
