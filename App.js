@@ -30,22 +30,45 @@ const drawGrid = (rowCount, lines, columns) => {
   DrawStrategy.draw(rows, grid, lines, columns)
   return grid
 }
-const title = Api.post //"MEGAVERSE"
+const title = "MEGAVERSE"
 
 const grid = drawGrid(rows, [milkyLine, planetLine], columns)
+
 export default function App() {
   let [isLoading, setIsLoading] = useState(true)
   let [error, setError] = useState()
   let [response, setResponse] = useState()
 
+  useEffect(() => {
+    //Api.get
+    fetch(Api.btcUrl)
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          setIsLoading(false), setResponse(result)
+        },
+        (error) => {
+          setIsLoading(false)
+          setError(error)
+        }
+      )
+  }, [])
+
   const getContent = () => {
-    return <ActivityIndicator size="large" />
+    if (isLoading) {
+      return <ActivityIndicator size="large" />
+    }
+    if (error) {
+      return <Text style={{ color: "red" }}>{error?.toString()}</Text>
+    }
+    console.log("API response" + response["bpi"]["USD"].rate) //+ response["bpi"]["USD"].rate)
+    return <Text style={{ color: "magenta" }}>API GET called</Text> //{response["bpi"]["USD"].rate}</Text>
   }
   return (
     <View style={styles.container}>
-      {getContent()}
       <Text style={styles.text}>{title}</Text>
       <Text style={styles.text}>{grid}</Text>
+      {getContent()}
       <StatusBar style="auto" />
     </View>
   )
