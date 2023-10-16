@@ -61,8 +61,12 @@ export default function App() {
     if (error) {
       return <Text style={{ color: "red" }}>{error?.toString()}</Text>
     }
-    console.log("API response" + response["bpi"]["USD"].rate) //+ response["bpi"]["USD"].rate)
-    return <Text style={{ color: "magenta" }}>API GET called</Text> //{response["bpi"]["USD"].rate}</Text>
+    console.log("API response" + response["bpi"]["USD"].rate)
+    return (
+      <Text style={{ color: "magenta" }}>
+        API GET called + {response["bpi"]["USD"].rate}
+      </Text>
+    )
   }
   return (
     <View style={styles.container}>
