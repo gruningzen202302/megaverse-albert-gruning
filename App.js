@@ -28,18 +28,18 @@ const drawLine = (emoji, columns) => {
 const milkyLine = drawLine(emoji.milky, columns)
 const planetLine = drawLine(emoji.planet, columns)
 
-const drawStrategy = (rowCount, grid, emojis) => {
+const drawStrategy = (rowCount, grid, lines) => {
   for (let rawPosition = 0; rawPosition < rowCount; rawPosition++) {
     if (rawPosition % 2 === 0) {
-      drawRaw(grid, emojis[0])
+      drawRaw(grid, lines[0])
     } else {
-      drawRaw(grid, emojis[1])
+      drawRaw(grid, lines[1])
     }
   }
 }
-const drawGrid = (rowCount, emojis) => {
+const drawGrid = (rowCount, lines) => {
   let grid = []
-  drawStrategy(rows, grid, emojis)
+  drawStrategy(rows, grid, lines)
   return grid
 }
 const grid = drawGrid(rows, [milkyLine, planetLine])
