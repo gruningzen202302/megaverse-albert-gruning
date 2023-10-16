@@ -33,9 +33,7 @@ const milkyLine = drawLine(emoji.milky, columns)
 const planetLine = drawLine(emoji.planet, columns)
 
 const drawStrategy = (rowCount, grid, lines, columnCount) => {
-  rowCount = 10
-  columnCount = 10
-  const columnOffset = columnCount //+ 1
+  const columnOffset = columnCount - 1
   const half = Math.floor(columnCount / 2)
   const margin = 1
 
@@ -47,7 +45,7 @@ const drawStrategy = (rowCount, grid, lines, columnCount) => {
   }
   for (let row = 0; row < half; row++) {
     for (let column = 0; column < half; column++) {
-      let opposite = columnOffset - 1 - column
+      let opposite = columnOffset - column
       const conditionsForTheShape =
         row === column && column > margin && row > margin
       if (conditionsForTheShape) {
@@ -58,6 +56,7 @@ const drawStrategy = (rowCount, grid, lines, columnCount) => {
       }
     }
   }
+  grid[5][5] = emoji.planet
 }
 
 const drawGrid = (rowCount, lines, columns) => {
@@ -82,7 +81,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#307BAA",
     alignItems: "center",
     justifyContent: "center",
-    padding: "8%", //"5%",
+    padding: "5%",
+    //padding: "8%",
   },
   text: {
     color: "#FFD700",
