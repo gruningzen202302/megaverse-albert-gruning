@@ -1,19 +1,10 @@
 import { StatusBar } from "expo-status-bar"
 import { StyleSheet, Text, View , ActivityIndicator} from "react-native"
+import { useState, useEffect } from "react"
+
 import DrawStrategy from "./draw"
-import { useState , useEffect} from "react"
-
-const milky = "\u{1F30C}"
-const planet = "\u{1FA90}"
-const purple = "\u{1F7E3}"
-const yellow = "\u{1F7E1}"
-
-const emoji = {
-  milky: milky,
-  planet: planet,
-  purple: purple,
-  yellow: yellow,
-}
+import Emoji from "./assets/emojiPixels"
+import Api from "./assets/api"
 
 const columns = 11
 const rows = 11
@@ -31,27 +22,28 @@ const drawLine = (emoji, columns) => {
   return line
 }
 
-const milkyLine = drawLine(emoji.milky, columns)
-const planetLine = drawLine(emoji.planet, columns)
+const milkyLine = drawLine(Emoji.milky, columns)
+const planetLine = drawLine(Emoji.planet, columns)
 
 const drawGrid = (rowCount, lines, columns) => {
   let grid = []
   DrawStrategy.draw(rows, grid, lines, columns)
   return grid
 }
-const title = "MEGAVERSE"
+const title = Api.post //"MEGAVERSE"
 
 const grid = drawGrid(rows, [milkyLine, planetLine], columns)
 export default function App() {
-  let [isLoading, setIsLoading] = useState(false)
-  let [error, setError]= useState()
+  let [isLoading, setIsLoading] = useState(true)
+  let [error, setError] = useState()
   let [response, setResponse] = useState()
 
-  const getContent =()=>{
-    return <ActivityIndicator size="large"/>
+  const getContent = () => {
+    return <ActivityIndicator size="large" />
   }
   return (
     <View style={styles.container}>
+      {getContent()}
       <Text style={styles.text}>{title}</Text>
       <Text style={styles.text}>{grid}</Text>
       <StatusBar style="auto" />

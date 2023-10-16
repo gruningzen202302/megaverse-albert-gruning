@@ -1,0 +1,4 @@
+const Secrets = {
+  candidateId: "",
+  ngrokKey: "",
+}
