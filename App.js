@@ -32,26 +32,23 @@ const drawLine = (emoji, columns) => {
 const milkyLine = drawLine(emoji.milky, columns)
 const planetLine = drawLine(emoji.planet, columns)
 
-const drawStrategy = (rowCount, grid, lines, columns) => {
-  const columnOffset = columns + 1
+const drawStrategy = (rowCount, grid, lines, columnCount) => {
+  rowCount = 10
+  columnCount = 10
+  const columnOffset = columnCount + 1
+  const half = Math.floor(columnCount / 2)
   for (let row = 0; row < rowCount; row++) {
     grid[row] = []
-    for (let column = 0; column < Math.floor(columns / 2); column++) {
+    for (let column = 0; column < columnCount; column++) {
       let oppositeColumn = columnOffset - column
-      grid[row][column] = emoji.milky
-      grid[row][oppositeColumn] = emoji.planet
+      if (row === column) {
+        grid[row][column] = emoji.planet
+        
+      } else {
+        grid[row][column] = emoji.milky
+      }
     }
   }
-
-  // for (let rawPosition = 0; rawPosition < rowCount; rawPosition++) {
-  //   lines[0][0] = emoji.purple
-  //   lines[0][1] = emoji.yellow
-  //   if (rawPosition % 2 === 0) {
-  //     drawRaw(grid, lines[0])
-  //   } else {
-  //     drawRaw(grid, lines[1])
-  //   }
-  // }
 }
 const drawGrid = (rowCount, lines, columns) => {
   let grid = []
@@ -75,7 +72,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#307BAA",
     alignItems: "center",
     justifyContent: "center",
-    padding: "5%",
+    padding: "8%", //"5%",
   },
   text: {
     color: "#FFD700",
