@@ -65,7 +65,7 @@ export default function App() {
     console.warn("testing API GET effects")
   }
   useEffect(() => {
-    Apiget()
+    Api.getApiData()
   }, [])
 
   const getContent = () => {
