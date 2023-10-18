@@ -45,11 +45,8 @@ export default function App() {
   let [column, setColumn] = useState(0)
   let [isLoading, setIsLoading] = useState(true)
   let [error, setError] = useState()
-  let [resBtc, setResBtc] = useState()
+  let [nameFromWiki, setNameFromWiki] = useState()
 
-  const Apiget = () => {
-    console.warn("testing API GET effects")
-  }
   useEffect(() => {
     Api.getWikiCallback()
     setIsLoading(false)
@@ -60,11 +57,8 @@ export default function App() {
       return <ActivityIndicator size="large" />
     }
     if (error) {
-      console.log(error)
-      return <Text style={{ color: "red" }}>{error?.toString()}</Text>
+      console.error(error)
     }
-    console.log("API response" + resBtc?.result)
-    return <Text style={{ color: "#ccc" }}>{resBtc}</Text>
   }
   return (
     <View style={styles.container}>
