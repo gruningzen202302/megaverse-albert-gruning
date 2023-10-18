@@ -45,19 +45,18 @@ export default function App() {
   let [column, setColumn] = useState(0)
   let [isLoading, setIsLoading] = useState(true)
   let [error, setError] = useState()
-  let [response, setResponse] = useState()
+  let [resBtc, setResBtc] = useState()
 
   useEffect(() => {
-    //Api.get
     fetch(Api.btcUrl)
       .then((res) => res.json())
       .then(
-        (result) => {
-          setIsLoading(false), setResponse(result)
+        (res) => {
+          setIsLoading(false), setResBtc(res)
         },
-        (error) => {
+        (err) => {
           setIsLoading(false)
-          setError(error)
+          setError(err)
         }
       )
   }, [])
@@ -76,10 +75,10 @@ export default function App() {
       console.log(error)
       return <Text style={{ color: "red" }}>{error?.toString()}</Text>
     }
-    console.log("API response" + response?.bpi?.USD?.rate)
+    console.log("API response" + resBtc?.bpi?.USD?.rate)
     return (
       <Text style={{ color: "#ccc" }}>
-        API GET called + {response?.bpi?.USD?.rate}
+        API GET called + {resBtc?.bpi?.USD?.rate}
       </Text>
     )
   }
