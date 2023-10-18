@@ -12,8 +12,8 @@ import { useState, useEffect } from "react"
 
 import DrawStrategy from "./draw"
 import Emoji from "./assets/emojiPixels"
-import Api from "./assets/api"
-import Model from "./model"
+import Api from "./api"
+import Model from "./model/model"
 
 let matrix = []
 
@@ -60,6 +60,12 @@ export default function App() {
           setError(error)
         }
       )
+  }, [])
+  const Apiget = () => {
+    console.warn("testing API GET effects")
+  }
+  useEffect(() => {
+    Apiget()
   }, [])
 
   const getContent = () => {

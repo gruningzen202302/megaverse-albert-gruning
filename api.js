@@ -1,4 +1,4 @@
-import Secrets from "../secrets"
+import Secrets from "./secrets"
 
 const candidateId = Secrets.candidateId
 const baseUrl = "https://challenge.crossmint.io/api"

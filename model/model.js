@@ -1,5 +1,5 @@
-import Emoji from "./assets/emojiPixels"
-import Secrets from "./secrets"
+import Emoji from "../assets/emojiPixels"
+import Secrets from "../secrets"
 
 const candidateId = Secrets.candidateId
 const baseUrl = "https://challenge.crossmint.io/api"
