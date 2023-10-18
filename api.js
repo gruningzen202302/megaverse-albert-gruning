@@ -19,7 +19,7 @@ const Api = {
   getFromJsonPlaceholder: async () => {
     let res = await fetch(placeHolderUrl)
     let formattedRes = await res.json()
-    console.warn(formattedRes?.title)
+    console.warn("LOREM " + formattedRes?.title)
   },
   getBtc:()=>{
       fetch(btcUrl)
