@@ -15,7 +15,7 @@ const Api = {
   polyanets: baseUrl + "/" + polyanets,
   soloons: baseUrl + "/" + soloons,
   comeths: baseUrl + "/" + comeths,
-  getApiData: async () => {
+  getFromJsonPlaceholder: async () => {
     let res = await fetch(placeHolderUrl)
     let formattedRes = await res.json()
     console.warn(formattedRes?.title)
