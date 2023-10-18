@@ -47,24 +47,12 @@ export default function App() {
   let [error, setError] = useState()
   let [resBtc, setResBtc] = useState()
 
-  useEffect(() => {
-    fetch(Api.btcUrl)
-      .then((res) => res.json())
-      .then(
-        (res) => {
-          setIsLoading(false), setResBtc(res)
-        },
-        (err) => {
-          setIsLoading(false)
-          setError(err)
-        }
-      )
-  }, [])
   const Apiget = () => {
     console.warn("testing API GET effects")
   }
   useEffect(() => {
-    Api.getFromJsonPlaceholder()
+    Api.getWikiCallback()
+    setIsLoading(false)
   }, [])
 
   const getContent = () => {
@@ -75,16 +63,13 @@ export default function App() {
       console.log(error)
       return <Text style={{ color: "red" }}>{error?.toString()}</Text>
     }
-    console.log("API response" + resBtc?.bpi?.USD?.rate)
-    return (
-      <Text style={{ color: "#ccc" }}>
-        API GET called + {resBtc?.bpi?.USD?.rate}
-      </Text>
-    )
+    console.log("API response" + resBtc?.result)
+    return <Text style={{ color: "#ccc" }}>{resBtc}</Text>
   }
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{title}</Text>
+      {getContent()}
       <View style={{ flexDirection: "row" }}>
         <TextInput
           placeholder="Row "
@@ -100,7 +85,6 @@ export default function App() {
         ></TextInput>
       </View>
       <Text style={styles.text}>{grid}</Text>
-      {getContent()}
       <View style={{ flexDirection: "row" }}>
         <Button
           title="Delete"
