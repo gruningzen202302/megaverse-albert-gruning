@@ -44,22 +44,28 @@ const Api = {
       )
   },
   getWiki: async () => {
+    let response = { resultWiki: undefined }
     try {
-      const response = await fetch(wikipediaUrl)
+      response = await fetch(wikipediaUrl)
       if (response.ok) {
-        const data = await response.json()
-        const pages = data.query.pages
-        const pageId = Object.keys(pages)[0]
-        const title = pages[pageId].title
-        console.warn("Title:", title)
-        const extract = pages[pageId].extract
-        console.warn("Extract:", extract)
+        console.log("response ok")
       } else {
-        console.error("Network response was not ok")
+        msg = "Network response was not ok"
+        console.error(msg)
       }
     } catch (err) {
-      console.error("Error catched:", err)
+      msg = "Error catched: " + err
+      console.error(msg)
     }
+
+    const data = await response.json()
+    const pages = data.query.pages
+    const pageId = Object.keys(pages)[0]
+    const title = pages[pageId].title.split(" ")[0]
+    const footer = title + " Gruning " + new Date().getFullYear()
+    //console.warn(footer)
+    response.resultWiki = footer
+    return response
   },
   getWikiCallback: async () => {
     fetch(wikipediaUrl)

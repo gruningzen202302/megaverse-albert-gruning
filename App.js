@@ -45,10 +45,18 @@ export default function App() {
   let [column, setColumn] = useState(0)
   let [isLoading, setIsLoading] = useState(true)
   let [error, setError] = useState()
-  let [nameFromWiki, setNameFromWiki] = useState()
+  let [nameFromWiki, setNameFromWiki] = useState(undefined)
+
+  const getWiki = async () => {
+    let res = await Api.getWiki()
+    res = await res.resultWiki
+    console.log("once " + res)
+    setNameFromWiki(res)
+  }
 
   useEffect(() => {
-    Api.getWikiCallback()
+    getWiki()
+    console.log("twice " + nameFromWiki)
     setIsLoading(false)
   }, [])
 
@@ -64,6 +72,11 @@ export default function App() {
     <View style={styles.container}>
       <Text style={styles.text}>{title}</Text>
       {getContent()}
+      {
+        <Text style={styles.secondaryText}>
+          {nameFromWiki ? nameFromWiki : "John Doe"}
+        </Text>
+      }
       <View style={{ flexDirection: "row" }}>
         <TextInput
           placeholder="Row "
@@ -111,6 +124,10 @@ const styles = StyleSheet.create({
     color: "#FFD700",
     fontSize: 15,
     fontWeight: "bold",
+  },
+  secondaryText: {
+    color: "#FFD700",
+    fontSize: 9,
   },
   input: {
     //alignSelf: "stretch",
