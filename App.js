@@ -31,14 +31,9 @@ const drawLine = (emoji, columns) => {
 const milkyLine = drawLine(Emoji.milky, Model.columns)
 const planetLine = drawLine(Emoji.planet, Model.columns)
 
-const drawGrid = (rowCount, lines, columns) => {
-  let grid = []
-  DrawStrategy.draw(Model.rows, grid, lines, Model.columns)
-  return grid
-}
 const title = "MEGAVERSE"
 
-const grid = drawGrid(Model.rows, [milkyLine, planetLine], Model.columns)
+const theGrid = DrawStrategy.init()
 
 export default function App() {
   let [row, setRow] = useState(0)
@@ -46,6 +41,7 @@ export default function App() {
   let [isLoading, setIsLoading] = useState(true)
   let [error, setError] = useState()
   let [nameFromWiki, setNameFromWiki] = useState(undefined)
+  let [grid, setGrid] = useState(DrawStrategy.init())
 
   const getWiki = async () => {
     let res = await Api.getWiki()
@@ -53,6 +49,12 @@ export default function App() {
     console.log("once " + res)
     setNameFromWiki(res)
   }
+
+ postClick = () => {
+
+  polyGrid = DrawStrategy.polyanets()
+  setGrid(polyGrid)
+ }
 
   useEffect(() => {
     getWiki()
@@ -103,7 +105,7 @@ export default function App() {
         <Button
           title="Post"
           style={styles.button}
-          onPress={() => Alert.alert("P O S T")}
+          onPress={() => setGrid()}
         ></Button>
       </View>
       <StatusBar style="auto" />
