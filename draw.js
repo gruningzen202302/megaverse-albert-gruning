@@ -1,7 +1,8 @@
 import Emoji from "./assets/emojiPixels"
+import Model from "./model/model"
 
-const rowCount = 11
-const columnCount = 11
+const rowCount = Model.rows
+const columnCount = Model.columns
 const columnOffset = columnCount - 1
 const half = Math.floor(columnCount / 2)
 const margin = 1

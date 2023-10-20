@@ -1,7 +1,19 @@
+import Model from "./model/model"
 import Secrets from "./secrets"
 
+const POST = "POST"
+
+let postOptions = {
+  method: POST,
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
+  body: "",
+}
 const candidateId = Secrets.candidateId
 const baseUrl = "https://challenge.crossmint.io/api"
+const localUrl = "https://localhost:7263/api"
 const polyanets = "polyanets"
 const soloons = "soloons"
 const comeths = "comeths"
@@ -63,7 +75,6 @@ const Api = {
     const pageId = Object.keys(pages)[0]
     const title = pages[pageId].title.split(" ")[0]
     const footer = title + " Gruning " + new Date().getFullYear()
-    //console.warn(footer)
     response.resultWiki = footer
     return response
   },
@@ -86,6 +97,27 @@ const Api = {
       .catch((err) => {
         console.error("catched error " + err)
         result = { error: true, result: err }
+      })
+  },
+  postPolyanet: async (polyanet) => {
+    postOptions.body = JSON.stringify(polyanet)
+    postOptions.method = POST
+    console.warn(postOptions)
+
+    fetch("https://localhost:7263/api/polyanets", postOptions)
+      //console.warn(footer)
+      //fetch(localUrl + "/" + polyanets, postOptions)
+      .then((res) => res.json())
+      .then(
+        (res) => {
+          console.log(res)
+        },
+        (err) => {
+          console.error(err)
+        }
+      )
+      .catch((err) => {
+        console.error(err)
       })
   },
 }

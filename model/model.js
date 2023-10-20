@@ -13,19 +13,19 @@ const Model = {
   rows: rows,
   columns: columns,
 
-  polyanets: {
-    candidateId: candidateId.toString(),
+  polyanet: {
+    candidateId: Secrets.candidateId,
     row: 10,
     column: 10,
   },
 
-  soloons: {
+  soloon: {
     candidateId: candidateId.toString(),
     row: 10,
     column: 10,
     color: Emoji.blue.toString(),
   },
-  comeths: {
+  cometh: {
     candidateId: candidateId.toString(),
     row: 10,
     column: 10,

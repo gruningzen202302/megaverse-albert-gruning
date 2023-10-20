@@ -14,6 +14,7 @@ import DrawStrategy from "./draw"
 import Emoji from "./assets/emojiPixels"
 import Api from "./api"
 import Model from "./model/model"
+import Secrets from "./secrets"
 
 let matrix = []
 
@@ -52,6 +53,11 @@ export default function App() {
 
   const postClick = () => {
     polyGrid = DrawStrategy.polyanets()
+    let polyanet = Model.polyanet
+    polyanet.row = row
+    polyanet.column = column
+    polyanet.candidateId = Secrets.candidateId
+    Api.postPolyanet(polyanet)
     setGrid(polyGrid)
     setRow(0)
     setColumn(0)
@@ -104,7 +110,7 @@ export default function App() {
           onPress={() => Alert.alert("R U sure ?")}
         />
         <Button
-          title="Post"
+          title="Polyanets"
           style={styles.button}
           onPress={() => postClick()}
         ></Button>
