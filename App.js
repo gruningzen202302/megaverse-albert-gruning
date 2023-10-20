@@ -58,6 +58,8 @@ export default function App() {
     polyanet.column = column
     polyanet.candidateId = Secrets.candidateId
     Api.postPolyanet(polyanet)
+    //let res = async () => await
+    //Api.drawPolyanet(polyanet)
     setGrid(polyGrid)
     setRow(0)
     setColumn(0)

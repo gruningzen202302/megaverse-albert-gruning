@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Android on Device",
+      "program": "${workspaceFolder}/node_modules/react-native/cli.js",
+      "type": "reactnative",
+      "request": "launch",
+      "platform": "android",
+      "port":8081,
+    },
+    {
+      "name": "Debug iOS on Device",
+      "program": "${workspaceFolder}/node_modules/react-native/cli.js",
+      "type": "reactnative",
+      "request": "launch",
+      "platform": "ios",
+    }
+  ]
+}

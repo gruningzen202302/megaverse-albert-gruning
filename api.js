@@ -4,17 +4,18 @@ import Secrets from "./secrets"
 const POST = "POST"
 
 let postOptions = {
-  method: POST,
-  mode: "cors",
+  method: "POST",
+  //mode: "cors",
   headers: {
     "Content-Type": "application/json",
-    Accept: "application/json",
+    //Accept: "application/json",
   },
   body: "",
 }
 const candidateId = Secrets.candidateId
 const baseUrl = "https://challenge.crossmint.io/api"
-const localUrl = "https://localhost:7263/api"
+const proxyUrl = "http://192.168.1.24:8081/api"
+const dotNetUrl = "http://localhost:5142/api"
 const polyanets = "polyanets"
 const soloons = "soloons"
 const comeths = "comeths"
@@ -104,28 +105,51 @@ const Api = {
     let opt = postOptions
     opt.body = JSON.stringify(polyanet)
     //postOptions.method = POST
+    console.log(dotNetUrl + "/" + polyanets)
     console.warn(postOptions)
 
-    fetch(baseUrl + "/" + polyanets, opt)
-      //console.warn(footer)
-      //fetch(localUrl + "/" + polyanets, postOptions)
-      .then((res) => res.json())
+    fetch("http://localhost:5142/api/polyanets", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(polyanet),
+    })
+      .then((res) => {
+        console.log("Response Status:", res.status)
+        return res.json()
+      })
       .then(
         (res) => {
+          console.log("success res")
           console.log(res)
         },
         (err) => {
           console.log("callback err")
-          console.error(err)
-          console.trace(err)
           console.error(err)
         }
       )
       .catch((err) => {
         console.log("catched err")
         console.error(err)
-        console.trace()
-        console.error(err)
+      })
+  },
+  drawPolyanet: async (polyanet) => {
+    postOptions.body = JSON.stringify(polyanet)
+    fetch("http://192.168.1.24:8081/api/polyanets", postOptions)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok")
+        }
+        return res.json()
+      })
+      .then((data) => {
+        // Handle the JSON response here
+      })
+      .catch((error) => {
+        console.error("Error:", error)
+        // You can log the response for further investigation
+        res.text().then((text) => console.log("Response Text:", text))
       })
   },
 }
