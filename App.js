@@ -41,7 +41,7 @@ export default function App() {
   let [isLoading, setIsLoading] = useState(true)
   let [error, setError] = useState()
   let [nameFromWiki, setNameFromWiki] = useState(undefined)
-  let [grid, setGrid] = useState(DrawStrategy.init())
+  let [grid, setGrid] = useState(theGrid)
 
   const getWiki = async () => {
     let res = await Api.getWiki()
@@ -50,11 +50,12 @@ export default function App() {
     setNameFromWiki(res)
   }
 
- postClick = () => {
-
-  polyGrid = DrawStrategy.polyanets()
-  setGrid(polyGrid)
- }
+  const postClick = () => {
+    polyGrid = DrawStrategy.polyanets()
+    setGrid(polyGrid)
+    setRow(0)
+    setColumn(0)
+  }
 
   useEffect(() => {
     getWiki()
@@ -105,7 +106,7 @@ export default function App() {
         <Button
           title="Post"
           style={styles.button}
-          onPress={() => setGrid()}
+          onPress={() => postClick()}
         ></Button>
       </View>
       <StatusBar style="auto" />
