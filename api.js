@@ -5,6 +5,7 @@ const POST = "POST"
 
 let postOptions = {
   method: POST,
+  mode: "cors",
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
@@ -100,11 +101,12 @@ const Api = {
       })
   },
   postPolyanet: async (polyanet) => {
-    postOptions.body = JSON.stringify(polyanet)
-    postOptions.method = POST
+    let opt = postOptions
+    opt.body = JSON.stringify(polyanet)
+    //postOptions.method = POST
     console.warn(postOptions)
 
-    fetch("https://localhost:7263/api/polyanets", postOptions)
+    fetch(baseUrl + "/" + polyanets, opt)
       //console.warn(footer)
       //fetch(localUrl + "/" + polyanets, postOptions)
       .then((res) => res.json())
@@ -113,10 +115,16 @@ const Api = {
           console.log(res)
         },
         (err) => {
+          console.log("callback err")
+          console.error(err)
+          console.trace(err)
           console.error(err)
         }
       )
       .catch((err) => {
+        console.log("catched err")
+        console.error(err)
+        console.trace()
         console.error(err)
       })
   },
