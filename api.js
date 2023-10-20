@@ -106,33 +106,35 @@ const Api = {
     opt.body = JSON.stringify(polyanet)
     //postOptions.method = POST
     console.log(dotNetUrl + "/" + polyanets)
-    console.warn(postOptions)
+debugger
+console.warn(postOptions)
 
-    fetch("http://localhost:5142/api/polyanets", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(polyanet),
-    })
-      .then((res) => {
-        console.log("Response Status:", res.status)
-        return res.json()
-      })
-      .then(
-        (res) => {
-          console.log("success res")
-          console.log(res)
-        },
-        (err) => {
-          console.log("callback err")
-          console.error(err)
-        }
-      )
-      .catch((err) => {
-        console.log("catched err")
-        console.error(err)
-      })
+fetch("http://localhost:5142/api/polyanets", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(polyanet),
+})
+  .then((res) => {
+    console.log("Response Status:", res.status)
+    return res.json()
+  })
+  .then(
+    (res) => {
+      console.log("success res")
+      console.log(res)
+    },
+    (err) => {
+      debugger
+      console.log("callback err")
+      console.error(err)
+    }
+  )
+  .catch((err) => {
+    console.log("catched err")
+    console.error(err)
+  })
   },
   drawPolyanet: async (polyanet) => {
     postOptions.body = JSON.stringify(polyanet)

@@ -2,19 +2,43 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Attach to packager",
+      "cwd": "${workspaceFolder}",
+      "type": "reactnative",
+      "request": "attach",
+      "port": 8081,
+      "sourceMaps": true
+    },
+    {
+      "name": "Run Android Classic",
+      "request": "launch",
+      "type": "reactnative",
+      "cwd": "${workspaceFolder}",
+      "enableDebug": false,
+      "platform": "android"
+    },
+    {
+      "name": "Debug Android Hermes",
+      "request": "launch",
+      "type": "reactnativedirect",
+      "cwd": "${workspaceFolder}",
+      "platform": "android"
+    },
+    {
+      "cwd": "${workspaceFolder}",
       "name": "Debug Android on Device",
       "program": "${workspaceFolder}/node_modules/react-native/cli.js",
       "type": "reactnative",
       "request": "launch",
-      "platform": "android",
-      "port":8081,
+      "platform": "android"
     },
     {
+      "cwd": "${workspaceFolder}",
       "name": "Debug iOS on Device",
       "program": "${workspaceFolder}/node_modules/react-native/cli.js",
       "type": "reactnative",
       "request": "launch",
-      "platform": "ios",
+      "platform": "ios"
     }
   ]
 }
