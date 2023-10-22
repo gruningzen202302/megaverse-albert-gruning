@@ -16,7 +16,7 @@ const candidateId = Secrets.candidateId
 const baseUrl = "https://challenge.crossmint.io/api"
 const proxyUrl = "http://192.168.1.24:8081/api"
 const dotNetUrl = "http://localhost:5142/api"
-const phisicalEmulatorUrl = "http://10.0.0.2:5142/api"
+const phisicalEmulatorUrl = "http://10.0.2.2:5142/api"
 const polyanets = "polyanets"
 const soloons = "soloons"
 const comeths = "comeths"
@@ -108,7 +108,7 @@ const Api = {
     //console.warn(postOptions)
 
     fetch(
-      "http://10.0.0.2:5142/api/polyanets",
+      "http://10.0.2.2:5142/api/polyanets",
       //"http://localhost:5142/api/polyanets",
       //"http://192.168.1.24:8081/api/polyanets",
       //"https://localhost:44365/api/polyanets",
