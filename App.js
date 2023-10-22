@@ -51,6 +51,13 @@ export default function App() {
     setNameFromWiki(res)
   }
 
+  const getPolyanetsClick = async () => {
+    console.log("getPolyanetsClick")
+    let res = await Api.getPolyanets()
+    console.log("getPolyanets res from AppJs")
+    //console.log(res)
+  }
+
   const postClick = () => {
     polyGrid = DrawStrategy.polyanets()
     let polyanet = Model.polyanet
@@ -67,7 +74,6 @@ export default function App() {
 
   useEffect(() => {
     getWiki()
-    console.log("twice " + nameFromWiki)
     setIsLoading(false)
   }, [])
 
@@ -115,7 +121,8 @@ export default function App() {
           title="Polyanets"
           style={styles.button}
           onPress={() => postClick()}
-        ></Button>
+        />
+        <Button title="Get" color="green" onPress={() => getPolyanetsClick()} />
       </View>
       <StatusBar style="auto" />
     </View>

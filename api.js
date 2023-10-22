@@ -16,6 +16,7 @@ const candidateId = Secrets.candidateId
 const baseUrl = "https://challenge.crossmint.io/api"
 const proxyUrl = "http://192.168.1.24:8081/api"
 const dotNetUrl = "http://localhost:5142/api"
+const phisicalEmulatorUrl = "http://10.0.0.2:5142/api"
 const polyanets = "polyanets"
 const soloons = "soloons"
 const comeths = "comeths"
@@ -62,7 +63,7 @@ const Api = {
     try {
       response = await fetch(wikipediaUrl)
       if (response.ok) {
-        console.log("response ok")
+        //console.log("response ok")
       } else {
         msg = "Network response was not ok"
         console.error(msg)
@@ -104,41 +105,55 @@ const Api = {
   postPolyanet: async (polyanet) => {
     let opt = postOptions
     opt.body = JSON.stringify(polyanet)
-    //postOptions.method = POST
-    console.log(dotNetUrl + "/" + polyanets)
-debugger
-console.warn(postOptions)
+    //console.warn(postOptions)
 
-fetch("http://localhost:5142/api/polyanets", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify(polyanet),
-})
-  .then((res) => {
-    console.log("Response Status:", res.status)
-    return res.json()
-  })
-  .then(
-    (res) => {
-      console.log("success res")
-      console.log(res)
-    },
-    (err) => {
-      debugger
-      console.log("callback err")
-      console.error(err)
-    }
-  )
-  .catch((err) => {
-    console.log("catched err")
-    console.error(err)
-  })
+    fetch(
+      "http://10.0.0.2:5142/api/polyanets",
+      //"http://localhost:5142/api/polyanets",
+      //"http://192.168.1.24:8081/api/polyanets",
+      //"https://localhost:44365/api/polyanets",
+      //"http:localhost:59365/api/polyanets",
+      {
+        method: "POST",
+        //Accept: "*/*",
+        headers: new Headers({
+          "Content-Type": "application/json",
+        }),
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+        body: JSON.stringify(polyanet),
+      }
+    )
+      .then((res) => {
+        console.log("then")
+        console.warn(res.status)
+        console.log("Response Status:", res.status)
+        return res.json()
+      })
+      .then(
+        (res) => {
+          console.log("success res")
+          console.log(res.status)
+        },
+        (err) => {
+          //debugger
+          console.log("callback err")
+          console.error(err)
+        }
+      )
+      .catch((err) => {
+        console.log("catched err")
+        console.error(err)
+      })
   },
   drawPolyanet: async (polyanet) => {
     postOptions.body = JSON.stringify(polyanet)
-    fetch("http://192.168.1.24:8081/api/polyanets", postOptions)
+    fetch(
+      "http://192.168.1.24:8081/api/polyanets",
+
+      postOptions
+    )
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok")
@@ -152,6 +167,26 @@ fetch("http://localhost:5142/api/polyanets", {
         console.error("Error:", error)
         // You can log the response for further investigation
         res.text().then((text) => console.log("Response Text:", text))
+      })
+  },
+  getPolyanets: async () => {
+    console.log("getPolyanets method")
+    console.log(phisicalEmulatorUrl + "/polyanets")
+    let res = await fetch(phisicalEmulatorUrl + "/polyanets")
+      .then((res) => {
+        return res.json()
+      })
+      .then(
+        (res) => {
+          console.warn(res)
+        },
+        (err) => {
+          console.error("API error " + err)
+          result = { error: true, result: err }
+        }
+      )
+      .catch((err) => {
+        console.error(err)
       })
   },
 }
