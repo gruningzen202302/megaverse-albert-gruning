@@ -51,11 +51,15 @@ export default function App() {
     setNameFromWiki(res)
   }
 
-  const crossPolyanetsClick = () => {
+  const crossPolyanetsClick = async () => {
     console.log("crossPolyanetsClick")
     const drawShapeMatrix = DrawStrategy.polyanetsCoordinates()
+   
+    await Api.postPolyanet(drawShapeMatrix[0])
+    
     for (const key in drawShapeMatrix) {
-       console.log(drawShapeMatrix[key])
+       //console.log(drawShapeMatrix[key])
+       //await Api.drawPolyanet(drawShapeMatrix[key])
         
     }
     console.log("crosPolyanets res from AppJs")

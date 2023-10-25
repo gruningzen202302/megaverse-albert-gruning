@@ -53,7 +53,7 @@ const DrawStrategy = {
         const conditionsForTheShape =
           row === column && column > margin && row > margin
         if (conditionsForTheShape) {
-          console.log("ROW " + row + " COLUMN " + column)
+          //console.log("ROW " + row + " COLUMN " + column)
           let polyanet = Model.polyanet
           polyanet.row = row  
           polyanet.column = column
@@ -86,8 +86,8 @@ const DrawStrategy = {
       }
     }
     
-    console.log("polyanets")
-    console.log(polyanets)
+    //console.log("polyanets")
+    //console.log(polyanets)
     return polyanets
   },
 }

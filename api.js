@@ -17,9 +17,9 @@ const baseUrl = "https://challenge.crossmint.io/api"
 const proxyUrl = "http://192.168.1.24:8081/api"
 const dotNetUrl = "http://localhost:5142/api"
 const phisicalEmulatorUrl = "http://10.0.2.2:5142/api"
-const polyanets = "polyanets"
-const soloons = "soloons"
-const comeths = "comeths"
+const polyanetsEndpoint = baseUrl +'/'+"polyanets"
+const soloonsEndpoint = baseUrl +'/'+ "soloons"
+const comethsEndpoint = baseUrl +'/'+"comeths"
 const btcUrl = "https://api.coindesk.com/v1/bpi/currentprice.json"
 const placeHolderUrl = "https://jsonplaceholder.typicode.com/posts/1"
 const wikipediaUrl =
@@ -32,9 +32,9 @@ const Api = {
   errorTestUrl:
     "this url does not exist expected TypeError Network request failed",
   placeHolderUrl: placeHolderUrl,
-  polyanets: baseUrl + "/" + polyanets,
-  soloons: baseUrl + "/" + soloons,
-  comeths: baseUrl + "/" + comeths,
+  polyanets: baseUrl + "/" + polyanetsEndpoint,
+  soloons: baseUrl + "/" + soloonsEndpoint,
+  comeths: baseUrl + "/" + comethsEndpoint,
   getFromJsonPlaceholder: async () => {
     try {
       let res = await fetch(placeHolderUrl)
@@ -103,58 +103,33 @@ const Api = {
       })
   },
   postPolyanet: async (polyanet) => {
-    let opt = postOptions
-    opt.body = JSON.stringify(polyanet)
-    //console.warn(postOptions)
 
-    fetch(
-      baseUrl,
-      //"http://10.0.2.2:5142/api/polyanets",
-      //"http://localhost:5142/api/polyanets",
-      //"http://192.168.1.24:8081/api/polyanets",
-      //"https://localhost:44365/api/polyanets",
-      //"http:localhost:59365/api/polyanets",
-      {
-        method: "POST",
-        //Accept: "*/*",
-        headers: new Headers({
-          "Content-Type": "application/json",
-        }),
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
-        body: JSON.stringify(polyanet),
-      }
-    )
-      .then((res) => {
-        console.log("then")
-        console.warn(res.status)
-        console.log("Response Status:", res.status)
-        return res.json()
-      })
-      .then(
-        (res) => {
-          console.log("success res")
-          console.log(res.status)
-        },
-        (err) => {
-          //debugger
-          console.log("callback err")
-          console.error(err)
-        }
-      )
-      .catch((err) => {
-        console.log("catched err")
-        console.error(err)
-      })
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      "candidateId": Secrets.candidateId,
+      "row": polyanet.row,
+      "column": polyanet.column,
+    })
+    console.log("raw ",raw)
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      //redirect: 'follow'
+    };
+
+fetch("https://challenge.crossmint.io/api/polyanets", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
   },
   drawPolyanet: async (polyanet) => {
     postOptions.body = JSON.stringify(polyanet)
-    fetch(
-      "http://192.168.1.24:8081/api/polyanets",
-
-      postOptions
-    )
+    console.log("drawPolyanet method", postOptions)
+    console.log("drawPolyanet ENDPOINT", polyanetsEndpoint)
+    fetch(polyanetsEndpoint,postOptions)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok")
@@ -162,7 +137,7 @@ const Api = {
         return res.json()
       })
       .then((data) => {
-        // Handle the JSON response here
+        console.log("Response Data:", data)
       })
       .catch((error) => {
         console.error("Error:", error)
