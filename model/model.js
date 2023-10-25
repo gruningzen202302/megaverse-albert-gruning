@@ -8,10 +8,14 @@ const soloons = "soloons"
 const comeths = "comeths"
 const rows = 11
 const columns = 11
+const logoRows = 31
+const logoColumns = 31
 
 const Model = {
   rows: rows,
   columns: columns,
+  logoRows: logoRows,
+  logoColumns: logoColumns,
 
   polyanet: {
     candidateId: Secrets.candidateId,

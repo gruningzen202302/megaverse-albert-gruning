@@ -79,6 +79,9 @@ export default function App() {
     setRow(0)
     setColumn(0)
   }
+  const postClickLogo = () => {
+    console.warn("postClickLogo")
+  }
 
   useEffect(() => {
     getWiki()
@@ -102,7 +105,7 @@ export default function App() {
           {nameFromWiki ? nameFromWiki : "John Doe"}
         </Text>
       }
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ flexDirection: "row" , padding:'5%'}}>
         <TextInput
           placeholder="Row "
           keyboardType="numeric"
@@ -117,7 +120,7 @@ export default function App() {
         ></TextInput>
       </View>
       <Text style={styles.text}>{grid}</Text>
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ flexDirection: "row", padding:"5%" }}>
         <Button
           title="Delete"
           color="red"
@@ -132,6 +135,22 @@ export default function App() {
         />
         <Button title="Shape" color="green" onPress={() => crossPolyanetsClick()} />
       </View>
+      <View style={{ flexDirection: "row" , padding:"5%"}}>
+        <Button
+          title="Delete"
+          color="red"
+          margin="15"
+          padding="15"
+          onPress={() => Alert.alert("Delete the LOGO, seriusly ?")}
+        />
+        <Button
+          title="Logo"
+          style={styles.button}
+          onPress={() => postClickLogo()}
+        />
+        <Button title="Shape" color="green" onPress={() => crossPolyanetsClick()} />
+      </View>
+      
       <StatusBar style="auto" />
     </View>
   )
@@ -143,12 +162,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#307BAA",
     alignItems: "center",
     justifyContent: "center",
-    padding: "5%",
+    padding: 0
     //padding: "8%",
   },
   text: {
     color: "#FFD700",
-    fontSize: 15,
+    fontSize: 6,
     fontWeight: "bold",
   },
   secondaryText: {
@@ -162,6 +181,6 @@ const styles = StyleSheet.create({
     padding: 4,
     backgroundColor: "#ccc",
     fontWeight: "bold",
-    fontSize: 15,
+    fontSize: 16,
   },
 })

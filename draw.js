@@ -2,8 +2,8 @@ import Emoji from "./assets/emojiPixels"
 import Model from "./model/model"
 import Secrets from "./secrets"
 
-const rowCount = Model.rows
-const columnCount = Model.columns
+const rowCount = Model.logoRows
+const columnCount = Model.logoColumns
 const columnOffset = columnCount - 1
 const half = Math.floor(columnCount / 2)
 const margin = 1
@@ -17,6 +17,20 @@ const DrawStrategy = {
         grid[row][column] = Emoji.milky
       }
     }
+    //grid[0][30] = Emoji.planet// use to calibrate
+    //grid[30][0] = Emoji.planet// use to calibrate
+    return grid
+  },
+    initSmall: () => {
+    let grid = []
+    for (let row = 0; row < rowCount; row++) {
+      grid[row] = []
+      for (let column = 0; column < columnCount; column++) {
+        grid[row][column] = Emoji.milky
+      }
+    }
+    // grid[0][11] = Emoji.planet// use to calibrate
+    // grid[11][0] = Emoji.planet// use to calibrate
     return grid
   },
   polyanets: () => {
