@@ -56,16 +56,17 @@ const DrawStrategy = {
     let half = Math.ceil(Model.logoLength/2)
     let halfLeaf = Math.ceil(half/2) + 1
       for (let x = 0; x < half; x++) {
-        let y = x
+        if(x<margin) continue
         if(x>halfLeaf) y = x - halfLeaf
-        
-        console.log('INDEX ',x)
         
         let formula = x < halfLeaf ? (x/3):(((half + 1) - x)/3)
         formula = Math.ceil(formula)
         console.log('INDEX ',x,'= ',formula)
         
+        theGrid[x + formula][x]= Emoji.planet
+
       }
+      return theGrid
   },
     polyanetsCoordinates: () => {
     let polyanets = []

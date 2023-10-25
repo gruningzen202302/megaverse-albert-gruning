@@ -85,7 +85,8 @@ export default function App() {
   }
   const postClickLogo = () => {
     console.warn("postClickLogo")
-    DrawStrategy.polyanetsLogo()
+    polyGridLogo = DrawStrategy.polyanetsLogo()
+    setGrid(polyGridLogo)
   }
 
   useEffect(() => {
