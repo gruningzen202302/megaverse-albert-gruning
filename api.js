@@ -23,7 +23,7 @@ const comeths = "comeths"
 const btcUrl = "https://api.coindesk.com/v1/bpi/currentprice.json"
 const placeHolderUrl = "https://jsonplaceholder.typicode.com/posts/1"
 const wikipediaUrl =
-  "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=true&titles=Albert_Einstein"
+  "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=true&titles=Michael_Jordan"//Albert_Einstein"
 
 let result = {}
 
@@ -76,7 +76,7 @@ const Api = {
     const data = await response.json()
     const pages = data.query.pages
     const pageId = Object.keys(pages)[0]
-    const title = pages[pageId].title.split(" ")[0]
+    const title = pages[pageId].title.split(" ")[0] // +" "+ pages[pageId].title.split(" ")[1]
     const footer = title + " Gruning " + new Date().getFullYear()
     response.resultWiki = footer
     return response
