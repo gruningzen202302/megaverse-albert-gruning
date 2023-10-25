@@ -51,6 +51,22 @@ const DrawStrategy = {
     theGrid[half][half] = Emoji.planet
     return theGrid
   },
+  polyanetsLogo:()=>{
+    let theGrid = DrawStrategy.init()
+    let half = Math.ceil(Model.logoLength/2)
+    let halfLeaf = Math.ceil(half/2) + 1
+      for (let x = 0; x < half; x++) {
+        let y = x
+        if(x>halfLeaf) y = x - halfLeaf
+        
+        console.log('INDEX ',x)
+        
+        let formula = x < halfLeaf ? (x/3):(((half + 1) - x)/3)
+        formula = Math.ceil(formula)
+        console.log('INDEX ',x,'= ',formula)
+        
+      }
+  },
     polyanetsCoordinates: () => {
     let polyanets = []
 
@@ -100,8 +116,6 @@ const DrawStrategy = {
       }
     }
     
-    //console.log("polyanets")
-    //console.log(polyanets)
     return polyanets
   },
 }

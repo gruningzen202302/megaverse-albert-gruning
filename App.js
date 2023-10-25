@@ -50,20 +50,24 @@ export default function App() {
     console.log("once " + res)
     setNameFromWiki(res)
   }
-
+  let secondStage= true
   const crossPolyanetsClick = async () => {
-    console.log("crossPolyanetsClick")
-    const drawShapeMatrix = DrawStrategy.polyanetsCoordinates()
-   
-    //await Api.postPolyanet(drawShapeMatrix[0])
-    
-    for (const key in drawShapeMatrix) {
-        await Api.postPolyanet(drawShapeMatrix[key]);
-        await new Promise(resolve => setTimeout(resolve, 1000)); 
-        
+    if(secondStage) {console.warn("secondStage"); return}
+    else{
+      console.log("crossPolyanetsClick")
+      const drawShapeMatrix = DrawStrategy.polyanetsCoordinates()
+     
+      for (const key in drawShapeMatrix) {
+          await Api.postPolyanet(drawShapeMatrix[key]);
+          await new Promise(resolve => setTimeout(resolve, 1000)); 
+          
+      }
+      console.log("crosPolyanets res from AppJs")
+
     }
-    console.log("crosPolyanets res from AppJs")
-    //console.log(res)
+  }
+  const logoPolyanetsClick = /**async */ () => {
+    console.warn("logo aPI")
   }
 
   const postClick = () => {
@@ -81,6 +85,7 @@ export default function App() {
   }
   const postClickLogo = () => {
     console.warn("postClickLogo")
+    DrawStrategy.polyanetsLogo()
   }
 
   useEffect(() => {
@@ -148,7 +153,7 @@ export default function App() {
           style={styles.button}
           onPress={() => postClickLogo()}
         />
-        <Button title="Shape" color="green" onPress={() => crossPolyanetsClick()} />
+        <Button title="Shape Logo" color="green" onPress={() => logoPolyanetsClick()} />
       </View>
       
       <StatusBar style="auto" />
