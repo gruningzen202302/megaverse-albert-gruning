@@ -36,6 +36,24 @@ const DrawStrategy = {
     theGrid[half][half] = Emoji.planet
     return theGrid
   },
+    polyanetsCoordinates: () => {
+    let theGrid = DrawStrategy.init()
+    for (let row = 0; row < half; row++) {
+      for (let column = 0; column < half; column++) {
+        let opposite = columnOffset - column
+        const conditionsForTheShape =
+          row === column && column > margin && row > margin
+        if (conditionsForTheShape) {
+          theGrid[row][column] = Emoji.planet
+          theGrid[row][opposite] = Emoji.planet
+          theGrid[opposite][column] = Emoji.planet
+          theGrid[opposite][opposite] = Emoji.planet
+        }
+      }
+    }
+    theGrid[half][half] = Emoji.planet
+    return theGrid
+  },
 }
 
 export default DrawStrategy

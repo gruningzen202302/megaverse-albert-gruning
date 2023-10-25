@@ -108,7 +108,8 @@ const Api = {
     //console.warn(postOptions)
 
     fetch(
-      "http://10.0.2.2:5142/api/polyanets",
+      baseUrl,
+      //"http://10.0.2.2:5142/api/polyanets",
       //"http://localhost:5142/api/polyanets",
       //"http://192.168.1.24:8081/api/polyanets",
       //"https://localhost:44365/api/polyanets",

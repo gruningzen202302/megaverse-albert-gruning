@@ -51,10 +51,13 @@ export default function App() {
     setNameFromWiki(res)
   }
 
-  const getPolyanetsClick = async () => {
-    console.log("getPolyanetsClick")
-    let res = await Api.getPolyanets()
-    console.log("getPolyanets res from AppJs")
+  const crossPolyanetsClick = async () => {
+    console.log("crossPolyanetsClick")
+    const drawShapeMatrix = DrawStrategy.polyanets()
+    console.log(drawShapeMatrix)
+
+    //let res = await Api.getPolyanets()
+    console.log("crosPolyanets res from AppJs")
     //console.log(res)
   }
 
@@ -122,7 +125,7 @@ export default function App() {
           style={styles.button}
           onPress={() => postClick()}
         />
-        <Button title="Get" color="green" onPress={() => getPolyanetsClick()} />
+        <Button title="Shape" color="green" onPress={() => crossPolyanetsClick()} />
       </View>
       <StatusBar style="auto" />
     </View>
