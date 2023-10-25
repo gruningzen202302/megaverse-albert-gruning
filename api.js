@@ -23,7 +23,7 @@ const comeths = "comeths"
 const btcUrl = "https://api.coindesk.com/v1/bpi/currentprice.json"
 const placeHolderUrl = "https://jsonplaceholder.typicode.com/posts/1"
 const wikipediaUrl =
-  "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=true&titles=Michael_Jordan"//Albert_Einstein"
+  "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=true&titles=Albert_Einstein"
 
 let result = {}
 
