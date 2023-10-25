@@ -58,7 +58,8 @@ export default function App() {
     //await Api.postPolyanet(drawShapeMatrix[0])
     
     for (const key in drawShapeMatrix) {
-      await Api.postPolyanet(drawShapeMatrix[key])
+        await Api.postPolyanet(drawShapeMatrix[key]);
+        await new Promise(resolve => setTimeout(resolve, 1000)); 
         
     }
     console.log("crosPolyanets res from AppJs")
