@@ -55,11 +55,10 @@ export default function App() {
     console.log("crossPolyanetsClick")
     const drawShapeMatrix = DrawStrategy.polyanetsCoordinates()
    
-    await Api.postPolyanet(drawShapeMatrix[0])
+    //await Api.postPolyanet(drawShapeMatrix[0])
     
     for (const key in drawShapeMatrix) {
-       //console.log(drawShapeMatrix[key])
-       //await Api.drawPolyanet(drawShapeMatrix[key])
+      await Api.postPolyanet(drawShapeMatrix[key])
         
     }
     console.log("crosPolyanets res from AppJs")

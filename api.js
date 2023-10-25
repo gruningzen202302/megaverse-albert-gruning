@@ -103,47 +103,27 @@ const Api = {
       })
   },
   postPolyanet: async (polyanet) => {
-
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      "candidateId": Secrets.candidateId,
+      "candidateId": "d7e13a9a-1e20-4b35-a594-630ec4bfb9a9",
       "row": polyanet.row,
-      "column": polyanet.column,
-    })
-    console.log("raw ",raw)
+      "column": polyanet.column
+    });
+
     var requestOptions = {
       method: 'POST',
       headers: myHeaders,
       body: raw,
-      //redirect: 'follow'
+      redirect: 'follow'
     };
 
-fetch("https://challenge.crossmint.io/api/polyanets", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
-  },
-  drawPolyanet: async (polyanet) => {
-    postOptions.body = JSON.stringify(polyanet)
-    console.log("drawPolyanet method", postOptions)
-    console.log("drawPolyanet ENDPOINT", polyanetsEndpoint)
-    fetch(polyanetsEndpoint,postOptions)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Network response was not ok")
-        }
-        return res.json()
-      })
-      .then((data) => {
-        console.log("Response Data:", data)
-      })
-      .catch((error) => {
-        console.error("Error:", error)
-        // You can log the response for further investigation
-        res.text().then((text) => console.log("Response Text:", text))
-      })
+    fetch("https://challenge.crossmint.io/api/polyanets", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+    
   },
   getPolyanets: async () => {
     console.log("getPolyanets method")
