@@ -1078,7 +1078,9 @@ const DrawStrategy = {
           '-Y=', __y,
           'Y(c)', _y_
           )
-          theGrid[x][y]= x===ctrl ? Emoji.white:Emoji.blue
+          //theGrid[x][y]= x===ctrl ? Emoji.white:Emoji.blue
+          theGrid[x][y]= x===ctrl ? Emoji.white:Emoji.planet
+          
           theGrid[y][x]= x===ctrl ? Emoji.white:Emoji.planet
           theGrid[__x][__y]= x===ctrl ? Emoji.white:Emoji.planet
           theGrid[__y][__x]= x===ctrl ? Emoji.white:Emoji.planet
@@ -1089,7 +1091,7 @@ const DrawStrategy = {
           theGrid[__x][y]= x===ctrl ? Emoji.white:Emoji.planet
           
         }
-        theGrid[ctrl][0] = Emoji.white
+        //theGrid[ctrl][0] = Emoji.white
         return theGrid
     },
     polyanetsCoordinates: () => {
