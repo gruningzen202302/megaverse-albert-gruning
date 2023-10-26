@@ -53,22 +53,35 @@ const DrawStrategy = {
   },
   polyanetsLogo:()=>{
     let theGrid = DrawStrategy.init()
+    let indexLength = Model.logoLength-1
     let half = Math.ceil(Model.logoLength/2)
     let halfLeaf = Math.ceil(half/2) + 1
-      for (let x = 0; x < half; x++) {
-        if(x<margin) continue
+    marginIndex= margin + 1
+      for (let x = marginIndex; x < half; x++) {
+        //if(x<margin) continue
         if(x>halfLeaf) y = x - halfLeaf
         
-        let formula = x < halfLeaf ? (x/3):(((half + 1) - x)/3)
+        let formula = x < halfLeaf ? (x/2):(((half + 1) - x)/2)
         formula = Math.ceil(formula)
-        console.log('INDEX ',x,'= ',formula)
         
-        theGrid[x+formula][x]= Emoji.planet
-        theGrid[x][x+formula]= Emoji.planet
-        theGrid[x+ (half-2)][x+formula+(half-2)]= Emoji.planet
-        theGrid[x+formula+(half-2)][x+ (half-2)]= Emoji.planet
+        let y= x+formula -1
+        console.log('X = ',x,'f(x)= ',formula , 'Y = ',y)
+        
+        theGrid[x][y]= x===14 ? Emoji.white:Emoji.planet
+        theGrid[y][x]= x===14 ? Emoji.white:Emoji.planet
+        theGrid[indexLength-x][indexLength -y]= x===14 ? Emoji.white:Emoji.planet
+        theGrid[indexLength-y][indexLength -x]= x===14 ? Emoji.white:Emoji.planet
+
+        //theGrid[formula+half][(Model.logoLength-1)-margin-x]= x===14 ? Emoji.red:Emoji.planet
+
+
+
+        //theGrid[x][x+formula]= Emoji.planet
+        //theGrid[x+ (half-2)][x+formula+(half-2)]= Emoji.planet
+        //theGrid[x+formula+(half-2)][x+ (half-2)]= Emoji.planet
 
       }
+      theGrid[14][0] = Emoji.white
       return theGrid
   },
     polyanetsCoordinates: () => {
