@@ -22,7 +22,7 @@ const DrawStrategy = {
     }
     grid[rowCount]=[]
     
-    for (let index = 0; index < Math.ceil(columnCount/2); index++) {
+    for (let index = 0; index < Math.ceil(columnCount/2)-2; index++) {
       grid[rowCount][index] = index.toString().padStart(3, "|");
     }
     grid[rowCount][0]="00"
@@ -1056,8 +1056,19 @@ const DrawStrategy = {
     let half = Math.ceil(Model.logoLength/2)
     let halfLeaf = Math.ceil(half/2) + 1
     let ctrl = 0
+    let strategCenterIndex = 8
     marginIndex= margin + 1
-      for (let x = marginIndex; x < half; x++) {
+
+    for (let x = marginIndex ; x < halfLeaf; x++) {
+      let formula = 2*(x-1)
+      console.log('CORNER','X = ',x,'f(x)= ',formula)
+      let y = x + formula
+      
+
+
+    }
+      for (let x = strategCenterIndex; x < half; x++) {
+      //for (let x = marginIndex; x < half; x++) {
         //if(x<margin) continue
         if(x>halfLeaf) y = x - halfLeaf
         
