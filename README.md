@@ -1,4 +1,5 @@
 # Create your own megaverse
+[![GitHub Actions Status](https://img.shields.io/github/workflow/status/gruningzen202302/megaverse-albert-gruning/Node.js%20CI?label=Tests)](https://github.com/gruningzen202302/megaverse-albert-gruning/actions)
 
 ## Megaverse is like Metaverse but cooler because you create it!
 
