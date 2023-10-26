@@ -17,6 +17,13 @@ const DrawStrategy = {
         grid[row][column] = Emoji.milky
       }
     }
+    grid[rowCount]=[]
+    
+    for (let index = 0; index < Math.ceil(columnCount/2); index++) {
+      grid[rowCount][index] = index.toString().padStart(3, "|");
+    }
+    grid[rowCount][0]="00"
+
     //grid[0][30] = Emoji.planet// use to calibrate
     //grid[30][0] = Emoji.planet// use to calibrate
     return grid
@@ -68,9 +75,9 @@ const DrawStrategy = {
         console.log('X = ',x,'f(x)= ',formula , 'Y = ',y)
         
         theGrid[x][y]= x===14 ? Emoji.white:Emoji.planet
-        theGrid[y][x]= x===14 ? Emoji.white:Emoji.planet
+        theGrid[y][x]= Emoji.planet
         theGrid[indexLength-x][indexLength -y]= x===14 ? Emoji.white:Emoji.planet
-        theGrid[indexLength-y][indexLength -x]= x===14 ? Emoji.white:Emoji.planet
+        theGrid[indexLength-y][indexLength -x]= Emoji.planet
 
         //theGrid[formula+half][(Model.logoLength-1)-margin-x]= x===14 ? Emoji.red:Emoji.planet
 
