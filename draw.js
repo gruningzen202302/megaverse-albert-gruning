@@ -1056,14 +1056,18 @@ const DrawStrategy = {
     let half = Math.ceil(Model.logoLength/2)
     let halfLeaf = Math.ceil(half/2) + 1
     let ctrl = 0
-    let strategCenterIndex = 8
+    let strategCenterIndex = 7
     marginIndex= margin + 1
+    const halfCorner = Math.floor(Model.logoLength/4)
+    console.warn(halfCorner)
 
-    for (let x = marginIndex ; x < halfLeaf; x++) {
+    for (let x = marginIndex ; x < halfCorner; x++) {
       let formula = 2*(x-1)
-      console.log('CORNER','X = ',x,'f(x)= ',formula)
-      let y = x + formula
-      
+      let y = formula  
+      console.log('CORNER','X = ',x,'f(x)= ',formula, 'Y=',y)
+      theGrid[x][y]= x===ctrl ? Emoji.white:Emoji.planet
+      theGrid[x][++y]= x===ctrl ? Emoji.white:Emoji.planet
+    
 
 
     }
