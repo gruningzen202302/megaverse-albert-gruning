@@ -63,6 +63,7 @@ const DrawStrategy = {
     let indexLength = Model.logoLength-1
     let half = Math.ceil(Model.logoLength/2)
     let halfLeaf = Math.ceil(half/2) + 1
+    let ctrl = 0
     marginIndex= margin + 1
       for (let x = marginIndex; x < half; x++) {
         //if(x<margin) continue
@@ -77,7 +78,7 @@ const DrawStrategy = {
 
         let _x_ = indexLength - formula
         let _y_ = indexLength - __y
-        if(x===13)console.log(
+        if(x===12)console.log(
           'X = ',x,
           'f(x)= ',formula , 
           'Y = ',y,
@@ -85,28 +86,20 @@ const DrawStrategy = {
           '-Y=', __y,
           'Y(c)', _y_
           )
-        
-        theGrid[x][y]= x===14 ? Emoji.white:Emoji.planet
-        theGrid[y][x]= x===14 ? Emoji.white:Emoji.planet
-        theGrid[__x][__y]= x===14 ? Emoji.white:Emoji.planet
-        theGrid[__y][__x]= x===14? Emoji.white:Emoji.planet
-        theGrid[x][__y]= x===14 ? Emoji.white:Emoji.planet
-        theGrid[__y][x]= x === 14 ? Emoji.white:Emoji.planet
-        
-        theGrid[x][_y_]= x===14 ? Emoji.blue:Emoji.planet
-
-        //theGrid[formula+half][(Model.logoLength-1)-margin-x]= x===14 ? Emoji.red:Emoji.planet
-
-
-
-        //theGrid[x][x+formula]= Emoji.planet
-        //theGrid[x+ (half-2)][x+formula+(half-2)]= Emoji.planet
-        //theGrid[x+formula+(half-2)][x+ (half-2)]= Emoji.planet
-
-      }
-      theGrid[13][0] = Emoji.white
-      return theGrid
-  },
+          theGrid[x][y]= x===ctrl ? Emoji.white:Emoji.planet
+          theGrid[y][x]= x===ctrl ? Emoji.white:Emoji.planet
+          theGrid[__x][__y]= x===ctrl ? Emoji.white:Emoji.planet
+          theGrid[__y][__x]= x===ctrl ? Emoji.white:Emoji.planet
+          theGrid[x][__y]= x===ctrl ? Emoji.white:Emoji.planet
+          theGrid[__y][x]= x === ctrl ? Emoji.white:Emoji.planet
+          
+          theGrid[y][__x]= x===ctrl ? Emoji.white:Emoji.planet
+          theGrid[__x][y]= x===ctrl ? Emoji.white:Emoji.planet
+          
+        }
+        theGrid[ctrl][0] = Emoji.white
+        return theGrid
+      },
     polyanetsCoordinates: () => {
     let polyanets = []
 
