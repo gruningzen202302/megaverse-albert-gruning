@@ -88,6 +88,10 @@ export default function App() {
     polyGridLogo = DrawStrategy.polyanetsLogo()
     setGrid(polyGridLogo)
   }
+  const hintClick = () => {
+    let goal = DrawStrategy.hintLogo()
+    setGrid(goal)
+  }
 
   useEffect(() => {
     getWiki()
@@ -143,11 +147,11 @@ export default function App() {
       </View>
       <View style={{ flexDirection: "row" , padding:"5%"}}>
         <Button
-          title="Delete"
+          title="hint"
           color="red"
           margin="15"
           padding="15"
-          onPress={() => Alert.alert("Delete the LOGO, seriusly ?")}
+          onPress={() => hintClick()}
         />
         <Button
           title="Logo"

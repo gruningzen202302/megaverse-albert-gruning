@@ -10,7 +10,7 @@ const rows = 11
 const columns = 11
 const logoRows = 31
 const logoColumns = 31
-const logoLength = 31
+const logoLength = 27
 
 const Model = {
   rows: rows,

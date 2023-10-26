@@ -1,70 +1,12 @@
-import { Alert } from "react-native"
-import Emoji from "./assets/emojiPixels"
-import Model from "./model/model"
-import Secrets from "./secrets"
-//import { test, expect } from '@jest/globals'
+import { test, expect } from '@jest/globals'
+import Emoji from "../assets/emojiPixels"
+import DrawStrategy from "../draw"
 
+    let theGrid1 = DrawStrategy.init()
+    theGrid1 = DrawStrategy.polyanetsLogo()
+    let theGrid2 = DrawStrategy.init()
 
-const rowCount = Model.logoRows
-const columnCount = Model.logoColumns
-const columnOffset = columnCount - 1
-const half = Math.floor(columnCount / 2)
-const margin = 1
-
-const DrawStrategy = {
-  init: () => {
-    let grid = []
-    for (let row = 0; row < rowCount; row++) {
-      grid[row] = []
-      for (let column = 0; column < columnCount; column++) {
-        grid[row][column] = Emoji.milky
-      }
-    }
-    grid[rowCount]=[]
-    
-    for (let index = 0; index < Math.ceil(columnCount/2); index++) {
-      grid[rowCount][index] = index.toString().padStart(3, "|");
-    }
-    grid[rowCount][0]="00"
-
-    //grid[0][30] = Emoji.planet// use to calibrate
-    //grid[30][0] = Emoji.planet// use to calibrate
-    return grid
-  },
-    initSmall: () => {
-    let grid = []
-    for (let row = 0; row < rowCount; row++) {
-      grid[row] = []
-      for (let column = 0; column < columnCount; column++) {
-        grid[row][column] = Emoji.milky
-      }
-    }
-    // grid[0][11] = Emoji.planet// use to calibrate
-    // grid[11][0] = Emoji.planet// use to calibrate
-    return grid
-  },
-  polyanets: () => {
-    let theGrid = DrawStrategy.init()
-    for (let row = 0; row < half; row++) {
-      for (let column = 0; column < half; column++) {
-        let opposite = columnOffset - column
-        const conditionsForTheShape =
-          row === column && column > margin && row > margin
-        if (conditionsForTheShape) {
-          theGrid[row][column] = Emoji.planet
-          theGrid[row][opposite] = Emoji.planet
-          theGrid[opposite][column] = Emoji.planet
-          theGrid[opposite][opposite] = Emoji.planet
-        }
-      }
-    }
-    theGrid[half][half] = Emoji.planet
-    return theGrid
-  },
-  hintLogo: () => {
-    let theGrid = DrawStrategy.init()
-    theGrid = DrawStrategy.polyanetsLogo()
-    let data =
+    const data1 =
     {
         "goal": [
             [
@@ -1029,120 +971,16 @@ const DrawStrategy = {
             ]
         ]
     }
-    let msg =''
-    let ctrl = 15
-    for (let y = 0; y < data.goal.length; y++) {
-        for (let x = 0; x < data.goal[y].length; x++) {
-            if (
-              data.goal[y][x] === 'POLYANET'
-              &&
-              true
-              //x>=ctrl
-              ) {
-                //theGrid[x][y] = Emoji.planet
-                theGrid[y][x] = Emoji.white
-                msg += "X=" + x + " Y=" + y + ";" + "\n"
+
+
+test('POLYANET appears in the same positions in data1 and data2', () => {
+    for (let y = 0; y < data1.goal.length; y++) {
+        for (let x = 0; x < data1.goal[y].length; x++) {
+            if (data1.goal[y][x] === 'POLYANET') {
+                console.log(`x: ${x} y: ${y}`)
+                theGrid2[y][x] = Emoji.planet
+                expect(theGrid1[y][x]).toBe(theGrid2[y][x])
             }
         }
     }
-
-    //console.log(msg)
-    return theGrid
-    //Alert.alert(msg)
-  },
-  polyanetsLogo:()=>{
-    let theGrid = DrawStrategy.init()
-    let indexLength = Model.logoLength-1
-    let half = Math.ceil(Model.logoLength/2)
-    let halfLeaf = Math.ceil(half/2) + 1
-    let ctrl = 0
-    marginIndex= margin + 1
-      for (let x = marginIndex; x < half; x++) {
-        //if(x<margin) continue
-        if(x>halfLeaf) y = x - halfLeaf
-        
-        let formula = x < halfLeaf ? (x/2):(((half + 1) - x)/2)
-        formula = Math.ceil(formula)
-        
-        let y= x+formula -1
-        let __x = indexLength - x //read it as minus x (not -x variable in JS)
-        let __y = indexLength - y
-
-        let _x_ = indexLength - formula
-        let _y_ = indexLength - __y
-        if(x===12)console.log(
-          'X = ',x,
-          'f(x)= ',formula , 
-          'Y = ',y,
-          '-X=', __x,
-          '-Y=', __y,
-          'Y(c)', _y_
-          )
-          theGrid[x][y]= x===ctrl ? Emoji.white:Emoji.blue
-          theGrid[y][x]= x===ctrl ? Emoji.white:Emoji.planet
-          theGrid[__x][__y]= x===ctrl ? Emoji.white:Emoji.planet
-          theGrid[__y][__x]= x===ctrl ? Emoji.white:Emoji.planet
-          theGrid[x][__y]= x===ctrl ? Emoji.white:Emoji.planet
-          theGrid[__y][x]= x === ctrl ? Emoji.white:Emoji.planet
-          
-          theGrid[y][__x]= x===ctrl ? Emoji.white:Emoji.planet
-          theGrid[__x][y]= x===ctrl ? Emoji.white:Emoji.planet
-          
-        }
-        theGrid[ctrl][0] = Emoji.white
-        return theGrid
-    },
-    polyanetsCoordinates: () => {
-    let polyanets = []
-
-    polyanets.push({
-          candidateId: Secrets.candidateId,
-          row: half,
-          column: half,
-    })
-    let theGrid = DrawStrategy.init()
-
-    for (let row = 0; row < half; row++) {
-      for (let column = 0; column < half; column++) {
-        let opposite = columnOffset - column
-        const conditionsForTheShape =
-          row === column && column > margin && row > margin
-        if (conditionsForTheShape) {
-          //console.log("ROW " + row + " COLUMN " + column)
-          let polyanet = Model.polyanet
-          polyanet.row = row  
-          polyanet.column = column
-          polyanets.push({
-                candidateId: Secrets.candidateId,
-                row: row,
-                column: column,
-          })
-
-          polyanets.push({
-                candidateId: Secrets.candidateId,
-                row: opposite,
-                column: column,
-          })
-
-          polyanets.push({
-                candidateId: Secrets.candidateId,
-                row: row,
-                column: opposite,
-          })
-
-          polyanets.push({
-                candidateId: Secrets.candidateId,
-                row: opposite,
-                column: opposite,
-          })
-
-
-        }
-      }
-    }
-    
-    return polyanets
-  },
-}
-
-export default DrawStrategy
+});
