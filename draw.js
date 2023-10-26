@@ -72,12 +72,28 @@ const DrawStrategy = {
         formula = Math.ceil(formula)
         
         let y= x+formula -1
-        console.log('X = ',x,'f(x)= ',formula , 'Y = ',y)
+        let __x = indexLength - x //read it as minus x (not -x variable in JS)
+        let __y = indexLength - y
+
+        let _x_ = indexLength - formula
+        let _y_ = indexLength - __y
+        if(x===13)console.log(
+          'X = ',x,
+          'f(x)= ',formula , 
+          'Y = ',y,
+          '-X=', __x,
+          '-Y=', __y,
+          'Y(c)', _y_
+          )
         
         theGrid[x][y]= x===14 ? Emoji.white:Emoji.planet
-        theGrid[y][x]= Emoji.planet
-        theGrid[indexLength-x][indexLength -y]= x===14 ? Emoji.white:Emoji.planet
-        theGrid[indexLength-y][indexLength -x]= Emoji.planet
+        theGrid[y][x]= x===14 ? Emoji.white:Emoji.planet
+        theGrid[__x][__y]= x===14 ? Emoji.white:Emoji.planet
+        theGrid[__y][__x]= x===14? Emoji.white:Emoji.planet
+        theGrid[x][__y]= x===14 ? Emoji.white:Emoji.planet
+        theGrid[__y][x]= x === 14 ? Emoji.white:Emoji.planet
+        
+        theGrid[x][_y_]= x===14 ? Emoji.blue:Emoji.planet
 
         //theGrid[formula+half][(Model.logoLength-1)-margin-x]= x===14 ? Emoji.red:Emoji.planet
 
@@ -88,7 +104,7 @@ const DrawStrategy = {
         //theGrid[x+formula+(half-2)][x+ (half-2)]= Emoji.planet
 
       }
-      theGrid[14][0] = Emoji.white
+      theGrid[13][0] = Emoji.white
       return theGrid
   },
     polyanetsCoordinates: () => {
