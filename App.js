@@ -84,7 +84,6 @@ export default function App() {
     setColumn(0)
   }
   const postClickLogo = () => {
-    console.warn("postClickLogo")
     setGrid([])
     polyGridLogo = DrawStrategy.polyanetsLogo()
     setGrid(polyGridLogo)

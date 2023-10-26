@@ -63,7 +63,10 @@ const DrawStrategy = {
         formula = Math.ceil(formula)
         console.log('INDEX ',x,'= ',formula)
         
-        theGrid[x + formula][x]= Emoji.planet
+        theGrid[x+formula][x]= Emoji.planet
+        theGrid[x][x+formula]= Emoji.planet
+        theGrid[x+ (half-2)][x+formula+(half-2)]= Emoji.planet
+        theGrid[x+formula+(half-2)][x+ (half-2)]= Emoji.planet
 
       }
       return theGrid
