@@ -234,6 +234,8 @@ const DrawStrategy = {
 
     let msg = `⬆️ ${fence.top} ⬇️ ${fence.bottom} ⬅️ ${fence.left} ➡️ ${fence.right}`
     console.warn(msg)
+
+    return fence
   },
 }
 
