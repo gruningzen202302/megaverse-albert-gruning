@@ -107,11 +107,30 @@ const DrawStrategy = {
       let _y_ = indexLength - formula
       let _x_ = indexLength - formula
 
-      console.log('CORNER','X = ',x,'f(x)= ',formula, 'Y=',y)
+      console.log('CORNER','X = ',x,'f(x)= ',formula, 'Y=',[y, y+1])
       theGrid[x][y]= x===ctrl ? Emoji.white:Emoji.planet
       theGrid[x][++y]= x===ctrl ? Emoji.white:Emoji.planet
-      theGrid[x][__y]= x===ctrl ? Emoji.white:Emoji.planet
 
+      theGrid[x][__y]= x===ctrl ? Emoji.white:Emoji.planet
+      theGrid[x][--__y]= x===ctrl ? Emoji.white:Emoji.planet
+
+      theGrid[y][x]= x===ctrl ? Emoji.white:Emoji.planet
+      theGrid[--y][x]= x===ctrl ? Emoji.white:Emoji.planet
+
+      theGrid[__y][x]= x===ctrl ? Emoji.white:Emoji.planet
+      theGrid[++__y][x]= x===ctrl ? Emoji.white:Emoji.planet
+
+      theGrid[__x][__y]= x===ctrl ? Emoji.white:Emoji.planet
+      theGrid[__x][--__y]= x===ctrl ? Emoji.white:Emoji.planet
+
+      theGrid[__x][y]= x===ctrl ? Emoji.white:Emoji.planet
+      theGrid[__x][++y]= x===ctrl ? Emoji.white:Emoji.planet
+
+      theGrid[y][__x]= x===ctrl ? Emoji.white:Emoji.planet
+      theGrid[--y][__x]= x===ctrl ? Emoji.white:Emoji.planet
+
+      theGrid[__y][__x]= x===ctrl ? Emoji.white:Emoji.planet
+      theGrid[++__y][__x]= x===ctrl ? Emoji.white:Emoji.planet
 
     }
       for (let x = strategCenterIndex; x < half; x++) {
