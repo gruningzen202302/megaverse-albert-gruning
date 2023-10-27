@@ -32,7 +32,7 @@ const DrawStrategy = {
     //grid[30][0] = Emoji.planet// use to calibrate
     return grid
   },
-    initSmall: () => {
+  initSmall: () => {
     let grid = []
     for (let row = 0; row < rowCount; row++) {
       grid[row] = []
@@ -97,21 +97,24 @@ const DrawStrategy = {
     let strategCenterIndex = 7
     marginIndex= margin + 1
     const halfCorner = Math.floor(Model.logoLength/4)
-    console.warn(halfCorner)
+    console.warn(halfCorner, indexLength)
 
     for (let x = marginIndex ; x < halfCorner; x++) {
       let formula = 2*(x-1)
       let y = formula  
+      let __y = indexLength - y
+      let __x = indexLength - x
+      let _y_ = indexLength - formula
+      let _x_ = indexLength - formula
+
       console.log('CORNER','X = ',x,'f(x)= ',formula, 'Y=',y)
       theGrid[x][y]= x===ctrl ? Emoji.white:Emoji.planet
       theGrid[x][++y]= x===ctrl ? Emoji.white:Emoji.planet
-    
+      theGrid[x][__y]= x===ctrl ? Emoji.white:Emoji.planet
 
 
     }
       for (let x = strategCenterIndex; x < half; x++) {
-      //for (let x = marginIndex; x < half; x++) {
-        //if(x<margin) continue
         if(x>halfLeaf) y = x - halfLeaf
         
         let formula = x < halfLeaf ? (x/2):(((half + 1) - x)/2)
