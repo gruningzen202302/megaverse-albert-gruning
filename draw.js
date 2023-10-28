@@ -241,17 +241,15 @@ const DrawStrategy = {
     let center = Math.floor(Model.logoLength / 2)
     console.log("center", center)
 
-    let cuadrantOne = theGrid[center - distance][center - distance]
-    let cuadrantTwo = theGrid[center + distance][center - distance]
-    let cuadrantThree = theGrid[center - distance][center + distance]
-    let cuadrantFour = theGrid[center + distance][center + distance]
+    let moveLeft = (projection) => -1 * projection
+    let moveUp = (center, distance, x, y) => 0
 
-    //theGrid[center - distance][center - distance] = Emoji.white
-    theGrid[center - distance + (projection)][center - distance] = Emoji.red
-    theGrid[center - distance][center - distance + projection] = Emoji.red
+    theGrid[center - distance + projection][center - distance] = Emoji.planet
+    theGrid[center - distance][center - distance + projection] = Emoji.planet
 
-    theGrid[center - distance][center + distance] = Emoji.white
-    theGrid[center - distance][center + distance] = Emoji.white
+    theGrid[center - distance][center + distance + moveLeft(projection)] =
+      Emoji.planet
+    theGrid[center - distance + projection][center + distance] = Emoji.planet
 
     theGrid[center + distance][center + distance] = Emoji.white
     theGrid[center + distance][center + distance] = Emoji.white
