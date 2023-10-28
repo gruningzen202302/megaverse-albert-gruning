@@ -17,6 +17,7 @@ import Model from "./model/model"
 import Secrets from "./secrets"
 
 let matrix = []
+let stage = 2
 
 const drawpixel = (arr, mil) => arr.push(mil)
 const drawRaw = (mat, row) => mat.push(row)
@@ -50,20 +51,20 @@ export default function App() {
     console.log("once " + res)
     setNameFromWiki(res)
   }
-  let secondStage= true
+  let secondStage = true
   const crossPolyanetsClick = async () => {
-    if(secondStage) {console.warn("secondStage"); return}
-    else{
+    if (secondStage) {
+      console.warn("secondStage")
+      return
+    } else {
       console.log("crossPolyanetsClick")
       const drawShapeMatrix = DrawStrategy.polyanetsCoordinates()
-     
+
       for (const key in drawShapeMatrix) {
-          await Api.postPolyanet(drawShapeMatrix[key]);
-          await new Promise(resolve => setTimeout(resolve, 1000)); 
-          
+        await Api.postPolyanet(drawShapeMatrix[key])
+        await new Promise((resolve) => setTimeout(resolve, 1000))
       }
       console.log("crosPolyanets res from AppJs")
-
     }
   }
   const logoPolyanetsClick = /**async */ () => {
@@ -108,14 +109,14 @@ export default function App() {
   }
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{title}</Text>
+      <Text style={styles.primaryText}>{title}</Text>
       {getContent()}
       {
         <Text style={styles.secondaryText}>
           {nameFromWiki ? nameFromWiki : "John Doe"}
         </Text>
       }
-      <View style={{ flexDirection: "row" , padding:'5%'}}>
+      <View style={{ flexDirection: "row", padding: "5%" }}>
         <TextInput
           placeholder="Row "
           keyboardType="numeric"
@@ -130,37 +131,64 @@ export default function App() {
         ></TextInput>
       </View>
       <Text style={styles.text}>{grid}</Text>
-      <View style={{ flexDirection: "row", padding:"5%" }}>
-        <Button
-          title="Delete"
-          color="red"
-          margin="15"
-          padding="15"
-          onPress={() => Alert.alert("R U sure ?")}
-        />
-        <Button
-          title="Polyanets"
-          style={styles.button}
-          onPress={() => postClick()}
-        />
-        <Button title="Shape" color="green" onPress={() => crossPolyanetsClick()} />
-      </View>
-      <View style={{ flexDirection: "row" , padding:"5%"}}>
-        <Button
-          title="hint"
-          color="red"
-          margin="15"
-          padding="15"
-          onPress={() => hintClick()}
-        />
-        <Button
-          title="Logo"
-          style={styles.button}
-          onPress={() => postClickLogo()}
-        />
-        <Button title="Shape Logo" color="green" onPress={() => logoPolyanetsClick()} />
-      </View>
-      
+
+      {stage === 1 && (
+        <View
+          style={{
+            flexDirection: "row",
+            padding: "5%",
+            width: "100%",
+            justifyContent: "space-around",
+          }}
+        >
+          <Button
+            title="Delete"
+            color="red"
+            margin="15"
+            padding="15"
+            onPress={() => Alert.alert("R U sure ?")}
+          />
+          <Button
+            title="Poly"
+            style={styles.button}
+            onPress={() => postClick()}
+          />
+          <Button
+            title="Shape"
+            color="green"
+            onPress={() => crossPolyanetsClick()}
+          />
+        </View>
+      )}
+      {stage === 2 && (
+        <View
+          style={{
+            flexDirection: "row",
+            padding: "5%",
+            width: "100%",
+            justifyContent: "space-around",
+          }}
+        >
+          <Button
+            title="hint"
+            color="red"
+            margin="15"
+            padding="15"
+            onPress={() => hintClick()}
+          />
+          <Button
+            title="Logo"
+            style={styles.button}
+            onPress={() => postClickLogo()}
+          />
+          <Button
+            title="Shape Logo"
+            color="green"
+            onPress={() => logoPolyanetsClick()}
+            
+          />
+        </View>
+      )}
       <StatusBar style="auto" />
     </View>
   )
@@ -172,8 +200,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#307BAA",
     alignItems: "center",
     justifyContent: "center",
-    padding: 0
+    padding: 0,
     //padding: "8%",
+  },
+  primaryText: {
+    color: "#FFD700",
+    fontSize: 14,
+    fontWeight: "bold",
   },
   text: {
     color: "#FFD700",
