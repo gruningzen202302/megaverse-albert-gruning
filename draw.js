@@ -170,7 +170,7 @@ const DrawStrategy = {
       theGrid[__x][y] = x === ctrl ? Emoji.white : Emoji.planet
     }
     //DrawStrategy.getFences(5, 8)
-    theGrid = DrawStrategy.joinLines(theGrid, 7, 2)
+    theGrid = DrawStrategy.joinLines(theGrid, 7, 3)
     return theGrid
   },
   polyanetsCoordinates: () => {
@@ -238,19 +238,27 @@ const DrawStrategy = {
     return fence
   },
   joinLines:(theGrid,distance, projection)=>{
-    let center = Math.floor(Model.logoLength/2)
-    console.log("center",center)
+    let center = Math.floor(Model.logoLength / 2)
+    console.log("center", center)
 
     let cuadrantOne = theGrid[center - distance][center - distance]
     let cuadrantTwo = theGrid[center + distance][center - distance]
     let cuadrantThree = theGrid[center - distance][center + distance]
     let cuadrantFour = theGrid[center + distance][center + distance]
 
-    theGrid[center - distance][center - distance] = Emoji.white
+    //theGrid[center - distance][center - distance] = Emoji.white
+    theGrid[center - distance + (projection + 1)][center - distance] = Emoji.red
+    theGrid[center - distance][center - distance + projection + 1] = Emoji.red
+
     theGrid[center - distance][center + distance] = Emoji.white
+    theGrid[center - distance][center + distance] = Emoji.white
+
     theGrid[center + distance][center + distance] = Emoji.white
+    theGrid[center + distance][center + distance] = Emoji.white
+
     theGrid[center + distance][center - distance] = Emoji.white
-    
+    theGrid[center + distance][center - distance] = Emoji.white
+
     return theGrid
   }
 }
