@@ -171,6 +171,7 @@ const DrawStrategy = {
     }
     //DrawStrategy.getFences(5, 8)
     theGrid = DrawStrategy.joinLines(theGrid, 7, 4)
+    theGrid = DrawStrategy.drawEmojis(theGrid)
     return theGrid
   },
   polyanetsCoordinates: () => {
@@ -249,8 +250,6 @@ const DrawStrategy = {
       center - distance + projection,
     ]
 
-    //let moveUp = (center, distance, x, y) => 0
-
     theGrid[center - distance + projection][center - distance] = Emoji.planet
     theGrid[center - distance][center - distance + projection] = Emoji.planet
 
@@ -270,6 +269,31 @@ const DrawStrategy = {
     theGrid[q4topX][q4topY] = Emoji.planet
     theGrid[q4rightX][q4rightY] = Emoji.planet
 
+    return theGrid
+  },
+  drawEmojis:(theGrid)=>{
+    let countSol = 0
+    let countComeths = 0 
+    let msg = ""
+
+    const goalResponse = GoalResponse
+    for (let y = 0; y < goalResponse.goal.length; y++) {
+      for (let x = 0; x < goalResponse.goal[y].length; x++) {
+        let pixel = goalResponse.goal[y][x]
+        if ( pixel.endsWith("COMETH")) countComeths++        
+        else if ( pixel.endsWith("SOLOON")) countSol++        
+      }
+    }
+
+    console.warn("countSol",countSol)
+    console.error("countComeths",countComeths)
+    
+    for (let row = 0; row < rowCount; row++) {
+      //theGrid[row] = []
+      for (let column = 0; column < columnCount; column++) {
+        //theGrid[row][column] = Emoji.white
+      }
+    }
     return theGrid
   }
 }
