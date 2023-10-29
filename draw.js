@@ -273,7 +273,7 @@ const DrawStrategy = {
     return polyanets
   },
   getFences: (x, y) => {
-    console.error("fences", x, y)
+    //console.error("fences", x, y)
 
     let fence = {
       top: [x - 1, y],
@@ -283,7 +283,7 @@ const DrawStrategy = {
     }
 
     let msg = `⬆️ ${fence.top} ⬇️ ${fence.bottom} ⬅️ ${fence.left} ➡️ ${fence.right}`
-    console.warn(msg)
+    //console.warn(msg)
 
     return fence
   },
@@ -322,6 +322,7 @@ const DrawStrategy = {
   },
   drawEmojis: (theGrid, logoPixels) => {
     let countSol = 0
+    let countSolInTheGrid = 0
     let countComeths = 0
     let msg = ""
     //let polyCoordinates
@@ -335,24 +336,40 @@ const DrawStrategy = {
       }
     }
 
-    console.warn("countSol", countSol)
-    console.error("countComeths", countComeths)
+    //console.warn("countSol", countSol)
+    //console.error("countComeths", countComeths)
 
     const emojisTotal = countSol + countComeths
     let emojisDrawn = 0
 
     let soloons = ["WHITE_SOLOON", "RED_SOLOON", "PURPLE_SOLOON", "BLUE_SOLOON"]
     let comeths = ["LEFT_COMETH", "RIGHT_COMETH", "UP_COMETH", "DOWN_COMETH"]
+
+    const checkForNeighbours = (polyanetFence, saloonFence) => {
+      for (const property in polyanetFence) {
+        if (saloonFence.hasOwnProperty(property))
+          if (polyanetFence[property] === saloonFence[property]) return true
+          else return false
+      }
+    }
+
     while (emojisDrawn++ < emojisTotal) {
       let randX = Math.floor(Math.random() * Model.logoArrayIndexSize)
       let randY = Math.floor(Math.random() * Model.logoArrayIndexSize)
-      //console.error("emojiDrawn", emojisDrawn, "randX", randX, "randY", randY)
-      //console.warn(DrawStrategy.getFences(randX, randY))
       let randEmoji = Math.floor(Math.random() * soloons.length)
-      conditionsForSoloons = theGrid[randX][randY] !== Emoji.planet
+      let fence = DrawStrategy.getFences(randX, randY)
+      let neighbours = false
 
-      if (true) {
+      //if( === Emoji.planet)
+
+      conditionsForSoloons =
+        theGrid[randX][randY] !== Emoji.planet && countSolInTheGrid < countSol
+      //&&fence.top[0] === randX
+      //&& fence.top[1] === randY
+
+      if (conditionsForSoloons) {
         theGrid[randX][randY] = Emoji.blue //Emoji[soloons[randEmoji]]
+        countSolInTheGrid++
       }
       //debugger
     }
