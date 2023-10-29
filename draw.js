@@ -357,7 +357,7 @@ const DrawStrategy = {
       let randX = Math.floor(Math.random() * Model.logoArrayIndexSize)
       let randY = Math.floor(Math.random() * Model.logoArrayIndexSize)
       let randEmoji = Math.floor(Math.random() * soloons.length)
-      let fence = DrawStrategy.getFences(randX, randY)
+      let polyanetFence = DrawStrategy.getFences(randX, randY)
       let neighbours = false
 
       //if( === Emoji.planet)
