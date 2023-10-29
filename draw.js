@@ -171,8 +171,57 @@ const DrawStrategy = {
     }
     //DrawStrategy.getFences(5, 8)
     theGrid = DrawStrategy.joinLines(theGrid, 7, 4)
-    theGrid = DrawStrategy.drawEmojis(theGrid)
+    const logoPixels = DrawStrategy.getJsonForLogo(theGrid)
+    theGrid = DrawStrategy.drawEmojis(theGrid, logoPixels)
     return theGrid
+  },
+  getJsonForLogo: (theGrid) => {
+    let logoPixels = []
+
+    logoPixels.push({
+      candidateId: Secrets.candidateId,
+      row: half,
+      column: half,
+    })
+
+    for (let row = 0; row < half; row++) {
+      for (let column = 0; column < half; column++) {
+        let opposite = columnOffset - column
+        const conditionsForTheShape =
+          row === column && column > margin && row > margin
+        if (conditionsForTheShape) {
+          //console.log("ROW " + row + " COLUMN " + column)
+          let polyanet = Model.polyanet
+          polyanet.row = row
+          polyanet.column = column
+          logoPixels.push({
+            candidateId: Secrets.candidateId,
+            row: row,
+            column: column,
+          })
+
+          logoPixels.push({
+            candidateId: Secrets.candidateId,
+            row: opposite,
+            column: column,
+          })
+
+          logoPixels.push({
+            candidateId: Secrets.candidateId,
+            row: row,
+            column: opposite,
+          })
+
+          logoPixels.push({
+            candidateId: Secrets.candidateId,
+            row: opposite,
+            column: opposite,
+          })
+        }
+      }
+    }
+
+    return logoPixels
   },
   polyanetsCoordinates: () => {
     let polyanets = []
@@ -238,7 +287,7 @@ const DrawStrategy = {
 
     return fence
   },
-  joinLines:(theGrid,distance, projection)=>{
+  joinLines: (theGrid, distance, projection) => {
     let center = Math.floor(Model.logoLength / 2)
     console.log("center", center)
 
@@ -271,31 +320,54 @@ const DrawStrategy = {
 
     return theGrid
   },
-  drawEmojis:(theGrid)=>{
+  drawEmojis: (theGrid, logoPixels) => {
     let countSol = 0
-    let countComeths = 0 
+    let countComeths = 0
     let msg = ""
+    //let polyCoordinates
 
     const goalResponse = GoalResponse
     for (let y = 0; y < goalResponse.goal.length; y++) {
       for (let x = 0; x < goalResponse.goal[y].length; x++) {
         let pixel = goalResponse.goal[y][x]
-        if ( pixel.endsWith("COMETH")) countComeths++        
-        else if ( pixel.endsWith("SOLOON")) countSol++        
+        if (pixel.endsWith("COMETH")) countComeths++
+        else if (pixel.endsWith("SOLOON")) countSol++
       }
     }
 
-    console.warn("countSol",countSol)
-    console.error("countComeths",countComeths)
-    
+    console.warn("countSol", countSol)
+    console.error("countComeths", countComeths)
+
+    const emojisTotal = countSol + countComeths
+    let emojisDrawn = 0
+
+    let soloons = ["WHITE_SOLOON", "RED_SOLOON", "PURPLE_SOLOON", "BLUE_SOLOON"]
+    let comeths = ["LEFT_COMETH", "RIGHT_COMETH", "UP_COMETH", "DOWN_COMETH"]
+    while (emojisDrawn++ < emojisTotal) {
+      let randX = Math.floor(Math.random() * Model.logoArrayIndexSize)
+      let randY = Math.floor(Math.random() * Model.logoArrayIndexSize)
+      //console.error("emojiDrawn", emojisDrawn, "randX", randX, "randY", randY)
+      //console.warn(DrawStrategy.getFences(randX, randY))
+      let randEmoji = Math.floor(Math.random() * soloons.length)
+      conditionsForSoloons = theGrid[randX][randY] !== Emoji.planet
+
+      if (true) {
+        theGrid[randX][randY] = Emoji.blue //Emoji[soloons[randEmoji]]
+      }
+      //debugger
+    }
+
     for (let row = 0; row < rowCount; row++) {
       //theGrid[row] = []
       for (let column = 0; column < columnCount; column++) {
+        if (theGrid[row][column] === Emoji.planet) {
+          //theGrid[row][column] = Emoji.white
+        }
         //theGrid[row][column] = Emoji.white
       }
     }
     return theGrid
-  }
+  },
 }
 
 export default DrawStrategy

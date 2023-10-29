@@ -10,6 +10,7 @@ const rows = 11
 const columns = 11
 const logoRows = 31
 const logoColumns = 31
+const logoArrayIndexSize = 30
 const logoLength = 27
 
 const Model = {
@@ -18,7 +19,7 @@ const Model = {
   logoRows: logoRows,
   logoColumns: logoColumns,
   logoLength: logoLength,
-
+  logoArrayIndexSize: logoArrayIndexSize,
   polyanet: {
     candidateId: Secrets.candidateId,
     row: 10,
