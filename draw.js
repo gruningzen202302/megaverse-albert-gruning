@@ -337,6 +337,9 @@ const DrawStrategy = {
     let soloons = ["WHITE_SOLOON", "RED_SOLOON", "PURPLE_SOLOON", "BLUE_SOLOON"]
     let comeths = ["LEFT_COMETH", "RIGHT_COMETH", "UP_COMETH", "DOWN_COMETH"]
 
+    let currentSoloon = 0
+    let currentCometh = 0
+
     const checkForNeighbours = (polyanetFence, saloonFence) => {
       for (const property in polyanetFence) {
         if (saloonFence.hasOwnProperty(property))
@@ -346,26 +349,11 @@ const DrawStrategy = {
     }
 
     while (emojisDrawn < emojisTotal) {
-      console.log("emojisDrawn", emojisDrawn)
-
-      //emojisTotal) {
       let randX = Math.floor(Math.random() * (Model.logoArrayIndexSize - 1))
       let randY = Math.floor(Math.random() * (Model.logoArrayIndexSize - 1))
 
       let neighbours = false
 
-      //console.warn("randX", randX, "randY", randY)
-      //console.warn("SoloonFence top", soloonFence.top)
-
-      //   //debugger
-      //   console.log(
-      //     "Grid coordinates ",
-      //     "X",
-      //     soloonFence.top[0],
-      //     "Y",
-      //     soloonFence.top[1]
-      //   )
-      //   console.log("Grid " + theGrid[soloonFence.top[0]][soloonFence.top[1]])
       let soloonFence = DrawStrategy.getFences(randX, randY)
       let conditionsForFillPixels =
         soloonFence.top[0] != undefined &&
@@ -374,21 +362,9 @@ const DrawStrategy = {
         soloonFence.top[1] < Model.logoArrayIndexSize &&
         randX > 0 &&
         randY > 0 &&
-        theGrid[randX][randY] !== Emoji.planet //&&
-      //theGrid[soloonFence.top[0]][soloonFence.top[1]] === Emoji.planet&&
-
-      //   console.log("conditionsForSoloons", conditionsForSoloons)
-      //   //debugger //TODO REMOVE
-      //     theGrid[soloonFence.top[0]][soloonFence.top[1]] === Emoji.planet //theGrid[randX-1][randY]//randX - 1 //&&
-      //   //soloonFence.top[1] === Emoji.planet //randY
+        theGrid[randX][randY] !== Emoji.planet
 
       if (conditionsForFillPixels) {
-        //console.log("coordinates", randX, randY)
-        // console.log(
-        //   "Blank spot ! Pixel top " +
-        //     theGrid[soloonFence.top[0]][soloonFence.top[1]]
-        // )
-
         let conditionsForSoloons =
           (theGrid[soloonFence.top[0]][soloonFence.top[1]] === Emoji.planet ||
             theGrid[soloonFence.cornerTopRight[0]][
@@ -411,32 +387,27 @@ const DrawStrategy = {
             ] === Emoji.planet) &&
           countSolInTheGrid <= countSol
 
-        //console.log("soloonFence", soloonFence)
         if (conditionsForSoloons) {
-          theGrid[randX][randY] = Emoji.blue //Emoji[soloons[randEmoji]]
-
+          if (currentSoloon > soloons.length - 1) currentSoloon = 0
+          else {
+            console.log("currentSoloon", soloons[currentSoloon])
+            currentSoloon++
+          }
+          theGrid[randX][randY] = Emoji.blue
           countSolInTheGrid++
         } else {
           if (countComethsInTheGrid >= countComeths) continue
+          if (currentCometh > comeths.length - 1) currentCometh = 0
+          else {
+            console.log("currentCometh", comeths[currentCometh])
+            currentCometh++
+          }
           theGrid[randX][randY] = Emoji.white
           countComethsInTheGrid++
         }
-
-        //   //debugger
       }
-
-      // for (let row = 0; row < rowCount; row++) {
-      //   //theGrid[row] = []
-      //   for (let column = 0; column < columnCount; column++) {
-      //     if (theGrid[row][column] === Emoji.planet) {
-      //       //theGrid[row][column] = Emoji.white
-      //     }
-      //     //theGrid[row][column] = Emoji.white
-      //   }
-      // }
       emojisDrawn++
     }
-    // return theGrid
 
     return theGrid
   },
@@ -445,8 +416,6 @@ const DrawStrategy = {
     let countSolInTheGrid = 0
     let countComeths = 0
     let msg = ""
-    //let polyCoordinates
-
     const goalResponse = GoalResponse
     for (let y = 0; y < goalResponse.goal.length; y++) {
       for (let x = 0; x < goalResponse.goal[y].length; x++) {
@@ -455,9 +424,6 @@ const DrawStrategy = {
         else if (pixel.endsWith("SOLOON")) countSol++
       }
     }
-
-    //console.warn("countSol", countSol)
-    //console.error("countComeths", countComeths)
 
     const emojisTotal = countSol + countComeths
     let emojisDrawn = 0
