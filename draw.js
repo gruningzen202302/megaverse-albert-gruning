@@ -340,52 +340,70 @@ const DrawStrategy = {
       }
     }
 
-    while (emojisDrawn < 3) {
+    while (emojisDrawn < 300) {
       console.log("emojisDrawn", emojisDrawn)
 
       //emojisTotal) {
-      let randX = Math.floor(Math.random() * Model.logoArrayIndexSize)
-      let randY = Math.floor(Math.random() * Model.logoArrayIndexSize)
-      let soloonFence = DrawStrategy.getFences(randX, randY)
+      let randX = Math.floor(Math.random() * (Model.logoArrayIndexSize - 1))
+      let randY = Math.floor(Math.random() * (Model.logoArrayIndexSize - 1))
+
       let neighbours = false
 
-    //   console.warn("randX", randX, "randY", randY)
-    //   console.warn("SoloonFence", soloonFence.top)
+      //console.warn("randX", randX, "randY", randY)
+      //console.warn("SoloonFence top", soloonFence.top)
 
-    //   //debugger
-    //   console.log(
-    //     "Grid coordinates ",
-    //     "X",
-    //     soloonFence.top[0],
-    //     "Y",
-    //     soloonFence.top[1]
-    //   )
-    //   console.log("Grid " + theGrid[soloonFence.top[0]][soloonFence.top[1]])
-    //   conditionsForSoloons = theGrid[randX][randY] !== Emoji.planet //&&
-    //   //countSolInTheGrid < countSol &&
+      //   //debugger
+      //   console.log(
+      //     "Grid coordinates ",
+      //     "X",
+      //     soloonFence.top[0],
+      //     "Y",
+      //     soloonFence.top[1]
+      //   )
+      //   console.log("Grid " + theGrid[soloonFence.top[0]][soloonFence.top[1]])
+      let soloonFence = DrawStrategy.getFences(randX, randY)
+      conditionsForSoloons =
+        soloonFence.top[0] != undefined &&
+        soloonFence.top[0] < Model.logoArrayIndexSize &&
+        soloonFence.top[1] != undefined &&
+        soloonFence.top[1] < Model.logoArrayIndexSize &&
+        randX > 0 &&
+        randY > 0 &&
+        theGrid[randX][randY] !== Emoji.planet &&
+        theGrid[soloonFence.top[0]][soloonFence.top[1]] === Emoji.planet
 
-    //   console.log("conditionsForSoloons", conditionsForSoloons)
-    //   //debugger //TODO REMOVE
-    //     theGrid[soloonFence.top[0]][soloonFence.top[1]] === Emoji.planet //theGrid[randX-1][randY]//randX - 1 //&&
-    //   //soloonFence.top[1] === Emoji.planet //randY
+      //countSolInTheGrid < countSol &&
 
-    //   if (conditionsForSoloons) {
-    //     theGrid[randX][randY] = Emoji.blue //Emoji[soloons[randEmoji]]
-    //     countSolInTheGrid++
-    //   } else continue
-    //   //debugger
-    // }
+      //   console.log("conditionsForSoloons", conditionsForSoloons)
+      //   //debugger //TODO REMOVE
+      //     theGrid[soloonFence.top[0]][soloonFence.top[1]] === Emoji.planet //theGrid[randX-1][randY]//randX - 1 //&&
+      //   //soloonFence.top[1] === Emoji.planet //randY
 
-    // for (let row = 0; row < rowCount; row++) {
-    //   //theGrid[row] = []
-    //   for (let column = 0; column < columnCount; column++) {
-    //     if (theGrid[row][column] === Emoji.planet) {
-    //       //theGrid[row][column] = Emoji.white
-    //     }
-    //     //theGrid[row][column] = Emoji.white
-    //   }
-    // }
-     emojisDrawn++
+      if (conditionsForSoloons) {
+        console.log("coordinates", randX, randY)
+        console.log(
+          "Blank sopt ! Pixel top " +
+            theGrid[soloonFence.top[0]][soloonFence.top[1]]
+        )
+
+        console.log("soloonFence", soloonFence)
+        theGrid[randX][randY] = Emoji.blue //Emoji[soloons[randEmoji]]
+        break
+        //     countSolInTheGrid++
+        //   } else continue
+        //   //debugger
+      }
+
+      // for (let row = 0; row < rowCount; row++) {
+      //   //theGrid[row] = []
+      //   for (let column = 0; column < columnCount; column++) {
+      //     if (theGrid[row][column] === Emoji.planet) {
+      //       //theGrid[row][column] = Emoji.white
+      //     }
+      //     //theGrid[row][column] = Emoji.white
+      //   }
+      // }
+      emojisDrawn++
     }
     // return theGrid
 
