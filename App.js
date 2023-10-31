@@ -48,7 +48,7 @@ export default function App() {
   const getWiki = async () => {
     let res = await Api.getWiki()
     res = await res.resultWiki
-    console.log("once " + res)
+    console.log("💡 Developed By " + res)
     setNameFromWiki(res)
   }
   let secondStage = true
@@ -67,12 +67,12 @@ export default function App() {
       console.log("crosPolyanets res from AppJs")
     }
   }
+  const logoPolyanetsClick = /**async */ () => {
+    console.warn("logo API")
+  }
   const fillConstellationClick = () => {
     const fullConstellation = DrawStrategy.fillConstellation(grid)
     setGrid(fullConstellation)
-  }
-  const logoPolyanetsClick = /**async */ () => {
-    console.warn("logo API")
   }
 
   const postClick = () => {
@@ -93,6 +93,12 @@ export default function App() {
     polyGridLogo = DrawStrategy.polyanetsLogo()
     setGrid(polyGridLogo)
   }
+
+  /**
+   * Gives you a HINT of the desired logo shape
+   * It also logs all the coordinates
+   * @returns {Array} The grid with the Goal logo shape
+   */
   const hintClick = () => {
     let goal = DrawStrategy.hintLogo()
     setGrid(goal)

@@ -67,7 +67,7 @@ const DrawStrategy = {
     theGrid = DrawStrategy.polyanetsLogo()
     let data = GoalResponse
 
-    let msg = ""
+    let msg = "💚 THE GOAL 💚: \n"
     let ctrl = 15
     for (let y = 0; y < data.goal.length; y++) {
       for (let x = 0; x < data.goal[y].length; x++) {
@@ -77,13 +77,13 @@ const DrawStrategy = {
           //x>=ctrl
         ) {
           //theGrid[x][y] = Emoji.planet
-          theGrid[y][x] = Emoji.white
+          theGrid[y][x] = Emoji.hint
           msg += "X=" + x + " Y=" + y + ";" + "\n"
         }
       }
     }
-
-    //console.log(msg)
+    msg += "💚💚💚💚💚: \n"
+    console.log(msg)
     return theGrid
     //Alert.alert(msg)
   },
@@ -279,7 +279,6 @@ const DrawStrategy = {
   },
   joinLines: (theGrid, distance, projection) => {
     let center = Math.floor(Model.logoLength / 2)
-    console.log("center", center)
 
     let negative = (value) => -1 * value
     let getPixelsForUpCuadrantFour = (center, distance) => [
@@ -390,7 +389,6 @@ const DrawStrategy = {
         if (conditionsForSoloons) {
           if (currentSoloon > soloons.length - 1) currentSoloon = 0
           else {
-            console.log("currentSoloon", soloons[currentSoloon])
             theGrid[randX][randY] = Emoji.soloons[currentSoloon]
             currentSoloon++
           }
@@ -399,7 +397,6 @@ const DrawStrategy = {
           if (countComethsInTheGrid >= countComeths) continue
           if (currentCometh > comeths.length - 1) currentCometh = 0
           else {
-            console.log("currentCometh", comeths[currentCometh])
             currentCometh++
           }
           theGrid[randX][randY] = Emoji.cometh 

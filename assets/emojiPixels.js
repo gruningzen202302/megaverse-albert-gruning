@@ -7,6 +7,7 @@ const blue = "🔵" //"\u{1F535}";
 const white = "🤍" //"\u{1F533}";
 
 const cometh = "🚀" //"\u{2604}"
+const hint = "💚"
 
 const up = "\u{2B06}"
 const down = "\u{2B07}"
@@ -31,6 +32,7 @@ const Emoji = {
 
   soloons: [white, purple, red, blue],
   comeths: [cometh],
+  hint: hint,
 }
 
 export default Emoji
