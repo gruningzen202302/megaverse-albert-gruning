@@ -172,7 +172,7 @@ const DrawStrategy = {
     //DrawStrategy.getFences(5, 8)
     theGrid = DrawStrategy.joinLines(theGrid, 7, 4)
     const logoPixels = DrawStrategy.getJsonForLogo(theGrid)
-    theGrid = DrawStrategy.drawEmojis(theGrid, logoPixels)
+    //theGrid = DrawStrategy.drawEmojis(theGrid, logoPixels)
     return theGrid
   },
   getJsonForLogo: (theGrid) => {
@@ -318,6 +318,94 @@ const DrawStrategy = {
     theGrid[q4topX][q4topY] = Emoji.planet
     theGrid[q4rightX][q4rightY] = Emoji.planet
 
+    return theGrid
+  },
+  fillConstellation: (theGrid) => {
+
+    theGrid= DrawStrategy.init()
+    theGrid = DrawStrategy.polyanetsLogo()
+    let countSol = 0
+    let countSolInTheGrid = 0
+    let countComeths = 0
+    let msg = ""
+    //let polyCoordinates
+
+    const goalResponse = GoalResponse
+    for (let y = 0; y < goalResponse.goal.length; y++) {
+      for (let x = 0; x < goalResponse.goal[y].length; x++) {
+        let pixel = goalResponse.goal[y][x]
+        if (pixel.endsWith("COMETH")) countComeths++
+        else if (pixel.endsWith("SOLOON")) countSol++
+      }
+    }
+
+    //console.warn("countSol", countSol)
+    //console.error("countComeths", countComeths)
+
+    const emojisTotal = countSol + countComeths
+    let emojisDrawn = 0
+
+    let soloons = ["WHITE_SOLOON", "RED_SOLOON", "PURPLE_SOLOON", "BLUE_SOLOON"]
+    let comeths = ["LEFT_COMETH", "RIGHT_COMETH", "UP_COMETH", "DOWN_COMETH"]
+
+    const checkForNeighbours = (polyanetFence, saloonFence) => {
+      for (const property in polyanetFence) {
+        if (saloonFence.hasOwnProperty(property))
+          if (polyanetFence[property] === saloonFence[property]) return true
+          else return false
+      }
+    }
+
+    while (emojisDrawn < 3) {
+      console.log("emojisDrawn", emojisDrawn)
+
+      //emojisTotal) {
+      let randX = Math.floor(Math.random() * Model.logoArrayIndexSize)
+      let randY = Math.floor(Math.random() * Model.logoArrayIndexSize)
+      let soloonFence = DrawStrategy.getFences(randX, randY)
+      let neighbours = false
+
+    //   console.warn("randX", randX, "randY", randY)
+    //   console.warn("SoloonFence", soloonFence.top)
+
+    //   //debugger
+    //   console.log(
+    //     "Grid coordinates ",
+    //     "X",
+    //     soloonFence.top[0],
+    //     "Y",
+    //     soloonFence.top[1]
+    //   )
+    //   console.log("Grid " + theGrid[soloonFence.top[0]][soloonFence.top[1]])
+    //   conditionsForSoloons = theGrid[randX][randY] !== Emoji.planet //&&
+    //   //countSolInTheGrid < countSol &&
+
+    //   console.log("conditionsForSoloons", conditionsForSoloons)
+    //   //debugger //TODO REMOVE
+    //     theGrid[soloonFence.top[0]][soloonFence.top[1]] === Emoji.planet //theGrid[randX-1][randY]//randX - 1 //&&
+    //   //soloonFence.top[1] === Emoji.planet //randY
+
+    //   if (conditionsForSoloons) {
+    //     theGrid[randX][randY] = Emoji.blue //Emoji[soloons[randEmoji]]
+    //     countSolInTheGrid++
+    //   } else continue
+    //   //debugger
+    // }
+
+    // for (let row = 0; row < rowCount; row++) {
+    //   //theGrid[row] = []
+    //   for (let column = 0; column < columnCount; column++) {
+    //     if (theGrid[row][column] === Emoji.planet) {
+    //       //theGrid[row][column] = Emoji.white
+    //     }
+    //     //theGrid[row][column] = Emoji.white
+    //   }
+    // }
+     emojisDrawn++
+    }
+    // return theGrid
+
+    theGrid[1][1]= Emoji.white
     return theGrid
   },
   drawEmojis: (theGrid, logoPixels) => {

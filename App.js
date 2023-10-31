@@ -67,8 +67,13 @@ export default function App() {
       console.log("crosPolyanets res from AppJs")
     }
   }
+  const fillConstellationClick = () => {
+    console.warn("fillConstellationClick")
+    const fullConstellation = DrawStrategy.fillConstellation(grid)
+    setGrid(fullConstellation)
+  }
   const logoPolyanetsClick = /**async */ () => {
-    console.warn("logo aPI")
+    console.warn("logo API")
   }
 
   const postClick = () => {
@@ -185,7 +190,7 @@ export default function App() {
             title="Fill"
             styles={styles.button}
             color={"purple"}
-            onPress={() => Alert.alert("cometths and soloons")}
+            onPress={fillConstellationClick}
           />
           <Button
             title="Check!"
