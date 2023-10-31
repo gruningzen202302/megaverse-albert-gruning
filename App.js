@@ -68,7 +68,6 @@ export default function App() {
     }
   }
   const fillConstellationClick = () => {
-    console.warn("fillConstellationClick")
     const fullConstellation = DrawStrategy.fillConstellation(grid)
     setGrid(fullConstellation)
   }

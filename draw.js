@@ -382,7 +382,7 @@ const DrawStrategy = {
             ] === Emoji.planet ||
             theGrid[soloonFence.left[0]][soloonFence.left[1]] ===
               Emoji.planet ||
-            theGrid[soloonFence.cornerBottomLeft[0]][
+            theGrid[soloonFence.cornerTopLeft[0]][
               soloonFence.cornerTopLeft[1]
             ] === Emoji.planet) &&
           countSolInTheGrid <= countSol
@@ -391,9 +391,9 @@ const DrawStrategy = {
           if (currentSoloon > soloons.length - 1) currentSoloon = 0
           else {
             console.log("currentSoloon", soloons[currentSoloon])
+            theGrid[randX][randY] = Emoji.soloons[currentSoloon]
             currentSoloon++
           }
-          theGrid[randX][randY] = Emoji.blue
           countSolInTheGrid++
         } else {
           if (countComethsInTheGrid >= countComeths) continue
@@ -402,7 +402,7 @@ const DrawStrategy = {
             console.log("currentCometh", comeths[currentCometh])
             currentCometh++
           }
-          theGrid[randX][randY] = Emoji.white
+          theGrid[randX][randY] = Emoji.cometh 
           countComethsInTheGrid++
         }
       }
