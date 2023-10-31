@@ -5,7 +5,7 @@
 
 <div style="display: flex; justify-content: space-between;">
     <img src="https://github.com/gruningzen202302/megaverse-albert-gruning/assets/124462872/e8e69456-83e2-4707-ba8d-d5346dc52b80" alt="Image 1" width="45%">
-    <img src="https://github.com/gruningzen202302/megaverse-albert-gruning/assets/124462872/f0f1988f-e19c-46dc-bc21-16042a19c080" alt="Image 2" width="45%">
+    <img src="./assets/final-screen.jpg" alt="Image 2" width="45%">
 </div>
 Welcome to our Crossmint coding challenge, in which you will help us mint a new megaverse into existence!
 
