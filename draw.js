@@ -353,24 +353,32 @@ const DrawStrategy = {
       }
     }
 
-    while (emojisDrawn++ < emojisTotal) {
+    while (emojisDrawn < 3) {
+      console.log("emojisDrawn", emojisDrawn)
+
+      //emojisTotal) {
       let randX = Math.floor(Math.random() * Model.logoArrayIndexSize)
       let randY = Math.floor(Math.random() * Model.logoArrayIndexSize)
       let randEmoji = Math.floor(Math.random() * soloons.length)
       let polyanetFence = DrawStrategy.getFences(randX, randY)
+      let soloonFence = DrawStrategy.getFences(randX, randY)
       let neighbours = false
 
-      //if( === Emoji.planet)
+      console.warn("randX", randX, "randY", randY)
+      console.warn("SoloonFence", soloonFence.top)
+
+      //debugger
 
       conditionsForSoloons =
-        theGrid[randX][randY] !== Emoji.planet && countSolInTheGrid < countSol
-      //&&fence.top[0] === randX
-      //&& fence.top[1] === randY
+        theGrid[randX][randY] !== Emoji.planet &&
+        //countSolInTheGrid < countSol &&
+        theGrid[soloonFence.top[0]][soloonFence.top[1]] === Emoji.planet //theGrid[randX-1][randY]//randX - 1 //&&
+      //soloonFence.top[1] === Emoji.planet //randY
 
       if (conditionsForSoloons) {
         theGrid[randX][randY] = Emoji.blue //Emoji[soloons[randEmoji]]
         countSolInTheGrid++
-      }
+      } else continue
       //debugger
     }
 
@@ -383,6 +391,7 @@ const DrawStrategy = {
         //theGrid[row][column] = Emoji.white
       }
     }
+    emojisDrawn++
     return theGrid
   },
 }
