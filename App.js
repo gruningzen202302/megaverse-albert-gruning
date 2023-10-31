@@ -182,10 +182,15 @@ export default function App() {
             onPress={() => postClickLogo()}
           />
           <Button
-            title="Shape Logo"
+            title="Fill"
+            styles={styles.button}
+            color={"purple"}
+            onPress={() => Alert.alert("cometths and soloons")}
+          />
+          <Button
+            title="Check!"
             color="green"
             onPress={() => logoPolyanetsClick()}
-            
           />
         </View>
       )}

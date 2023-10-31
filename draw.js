@@ -359,8 +359,6 @@ const DrawStrategy = {
       //emojisTotal) {
       let randX = Math.floor(Math.random() * Model.logoArrayIndexSize)
       let randY = Math.floor(Math.random() * Model.logoArrayIndexSize)
-      let randEmoji = Math.floor(Math.random() * soloons.length)
-      let polyanetFence = DrawStrategy.getFences(randX, randY)
       let soloonFence = DrawStrategy.getFences(randX, randY)
       let neighbours = false
 
@@ -368,10 +366,19 @@ const DrawStrategy = {
       console.warn("SoloonFence", soloonFence.top)
 
       //debugger
+      console.log(
+        "Grid coordinates ",
+        "X",
+        soloonFence.top[0],
+        "Y",
+        soloonFence.top[1]
+      )
+      console.log("Grid " + theGrid[soloonFence.top[0]][soloonFence.top[1]])
+      conditionsForSoloons = theGrid[randX][randY] !== Emoji.planet //&&
+      //countSolInTheGrid < countSol &&
 
-      conditionsForSoloons =
-        theGrid[randX][randY] !== Emoji.planet &&
-        //countSolInTheGrid < countSol &&
+      console.log("conditionsForSoloons", conditionsForSoloons)
+      //debugger //TODO REMOVE
         theGrid[soloonFence.top[0]][soloonFence.top[1]] === Emoji.planet //theGrid[randX-1][randY]//randX - 1 //&&
       //soloonFence.top[1] === Emoji.planet //randY
 
