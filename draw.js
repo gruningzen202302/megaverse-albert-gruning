@@ -266,6 +266,10 @@ const DrawStrategy = {
       bottom: [x + 1, y],
       left: [x, y - 1],
       right: [x, y + 1],
+      cornerTopLeft: [x - 1, y - 1],
+      cornerTopRight: [x - 1, y + 1],
+      cornerBottomLeft: [x + 1, y - 1],
+      cornerBottomRight: [x + 1, y + 1],
     }
 
     let msg = `⬆️ ${fence.top} ⬇️ ${fence.bottom} ⬅️ ${fence.left} ➡️ ${fence.right}`
@@ -313,6 +317,7 @@ const DrawStrategy = {
     let countSol = 0
     let countSolInTheGrid = 0
     let countComeths = 0
+    let countComethsInTheGrid = 0
     let msg = ""
     //let polyCoordinates
 
@@ -340,7 +345,7 @@ const DrawStrategy = {
       }
     }
 
-    while (emojisDrawn < 300) {
+    while (emojisDrawn < emojisTotal) {
       console.log("emojisDrawn", emojisDrawn)
 
       //emojisTotal) {
@@ -362,35 +367,43 @@ const DrawStrategy = {
       //   )
       //   console.log("Grid " + theGrid[soloonFence.top[0]][soloonFence.top[1]])
       let soloonFence = DrawStrategy.getFences(randX, randY)
-      conditionsForSoloons =
+      let conditionsForFillPixels =
         soloonFence.top[0] != undefined &&
         soloonFence.top[0] < Model.logoArrayIndexSize &&
         soloonFence.top[1] != undefined &&
         soloonFence.top[1] < Model.logoArrayIndexSize &&
         randX > 0 &&
         randY > 0 &&
-        theGrid[randX][randY] !== Emoji.planet &&
-        theGrid[soloonFence.top[0]][soloonFence.top[1]] === Emoji.planet
-
-      //countSolInTheGrid < countSol &&
+        theGrid[randX][randY] !== Emoji.planet //&&
+      //theGrid[soloonFence.top[0]][soloonFence.top[1]] === Emoji.planet&&
 
       //   console.log("conditionsForSoloons", conditionsForSoloons)
       //   //debugger //TODO REMOVE
       //     theGrid[soloonFence.top[0]][soloonFence.top[1]] === Emoji.planet //theGrid[randX-1][randY]//randX - 1 //&&
       //   //soloonFence.top[1] === Emoji.planet //randY
 
-      if (conditionsForSoloons) {
-        console.log("coordinates", randX, randY)
-        console.log(
-          "Blank sopt ! Pixel top " +
-            theGrid[soloonFence.top[0]][soloonFence.top[1]]
-        )
+      if (conditionsForFillPixels) {
+        //console.log("coordinates", randX, randY)
+        // console.log(
+        //   "Blank spot ! Pixel top " +
+        //     theGrid[soloonFence.top[0]][soloonFence.top[1]]
+        // )
 
-        console.log("soloonFence", soloonFence)
-        theGrid[randX][randY] = Emoji.blue //Emoji[soloons[randEmoji]]
-        break
-        //     countSolInTheGrid++
-        //   } else continue
+        let conditionsForSoloons =
+          theGrid[soloonFence.top[0]][soloonFence.top[1]] === Emoji.planet &&
+          countSolInTheGrid < countSol
+
+        //console.log("soloonFence", soloonFence)
+        if (conditionsForSoloons) {
+          theGrid[randX][randY] = Emoji.blue //Emoji[soloons[randEmoji]]
+
+          countSolInTheGrid++
+        } else {
+          if (countComethsInTheGrid >= countComeths) continue
+          theGrid[randX][randY] = Emoji.white
+          countComethsInTheGrid++
+        }
+
         //   //debugger
       }
 
@@ -407,7 +420,6 @@ const DrawStrategy = {
     }
     // return theGrid
 
-    theGrid[30][0] = Emoji.white
     return theGrid
   },
   drawEmojis: (theGrid, logoPixels) => {
