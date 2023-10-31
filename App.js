@@ -67,9 +67,20 @@ export default function App() {
       console.log("crosPolyanets res from AppJs")
     }
   }
+
+   /**
+   * Calls the API to draw the logo shape
+   * @returns {JSON} the POST response 
+   */
   const logoPolyanetsClick = /**async */ () => {
     console.warn("logo API")
   }
+
+   /**
+   * Draws the soloons pixels in random positions, next to the logo shape
+   * Draws the comeths pixels in random positions, far from the logo shape
+   * @returns {Array} The grid with the constellation pixels
+   */
   const fillConstellationClick = () => {
     const fullConstellation = DrawStrategy.fillConstellation(grid)
     setGrid(fullConstellation)
@@ -88,6 +99,11 @@ export default function App() {
     setRow(0)
     setColumn(0)
   }
+
+   /**
+   * Draws the logo shape
+   * @returns {Array} The grid with the logo 
+   */
   const postClickLogo = () => {
     setGrid([])
     polyGridLogo = DrawStrategy.polyanetsLogo()

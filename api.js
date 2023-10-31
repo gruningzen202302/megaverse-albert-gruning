@@ -125,6 +125,33 @@ const Api = {
       .catch(error => console.log('error', error));
     
   },
+  postMegaverseStageTwo:async(pixel, type)=>{
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      "candidateId": "d7e13a9a-1e20-4b35-a594-630ec4bfb9a9",
+      "row": pixel.row,
+      "column": pixel.column
+    });
+    switch (type) {
+      case "polyanets":
+        console.log("polyanets")
+    }
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    // fetch("https://challenge.crossmint.io/api/polyanets", requestOptions)
+    //   .then(response => response.text())
+    //   .then(result => console.log(result))
+    //   .catch(error => console.log('error', error));
+    
+  },
   getPolyanets: async () => {
     console.log("getPolyanets method")
     console.log(phisicalEmulatorUrl + "/polyanets")
