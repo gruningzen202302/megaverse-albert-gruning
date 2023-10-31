@@ -105,7 +105,6 @@ const DrawStrategy = {
       let _y_ = indexLength - formula
       let _x_ = indexLength - formula
 
-      console.log("CORNER", "X = ", x, "f(x)= ", formula, "Y=", [y, y + 1])
       theGrid[x][y] = x === ctrl ? Emoji.white : Emoji.planet
       theGrid[x][++y] = x === ctrl ? Emoji.white : Emoji.planet
 
@@ -143,21 +142,8 @@ const DrawStrategy = {
       let _x_ = indexLength - formula
       let _y_ = indexLength - __y
       if (x === 12)
-        console.log(
-          "X = ",
-          x,
-          "f(x)= ",
-          formula,
-          "Y = ",
-          y,
-          "-X=",
-          __x,
-          "-Y=",
-          __y,
-          "Y(c)",
-          _y_
-        )
-      //theGrid[x][y]= x===ctrl ? Emoji.white:Emoji.blue
+
+      theGrid[x][y]= x===ctrl ? Emoji.white:Emoji.blue
       theGrid[x][y] = x === ctrl ? Emoji.white : Emoji.planet
 
       theGrid[y][x] = x === ctrl ? Emoji.white : Emoji.planet
@@ -339,8 +325,6 @@ const DrawStrategy = {
       }
     }
 
-    //console.warn("countSol", countSol)
-    //console.error("countComeths", countComeths)
 
     const emojisTotal = countSol + countComeths
     let emojisDrawn = 0
@@ -405,7 +389,7 @@ const DrawStrategy = {
     }
     // return theGrid
 
-    theGrid[1][1]= Emoji.white
+    theGrid[30][0] = Emoji.white
     return theGrid
   },
   drawEmojis: (theGrid, logoPixels) => {
