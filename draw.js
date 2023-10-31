@@ -390,8 +390,26 @@ const DrawStrategy = {
         // )
 
         let conditionsForSoloons =
-          theGrid[soloonFence.top[0]][soloonFence.top[1]] === Emoji.planet &&
-          countSolInTheGrid < countSol
+          (theGrid[soloonFence.top[0]][soloonFence.top[1]] === Emoji.planet ||
+            theGrid[soloonFence.cornerTopRight[0]][
+              soloonFence.cornerTopRight[1]
+            ] === Emoji.planet ||
+            theGrid[soloonFence.right[0]][soloonFence.right[1]] ===
+              Emoji.planet ||
+            theGrid[soloonFence.cornerBottomRight[0]][
+              soloonFence.cornerBottomRight[1]
+            ] === Emoji.planet ||
+            theGrid[soloonFence.bottom[0]][soloonFence.bottom[1]] ===
+              Emoji.planet ||
+            theGrid[soloonFence.cornerBottomLeft[0]][
+              soloonFence.cornerBottomLeft[1]
+            ] === Emoji.planet ||
+            theGrid[soloonFence.left[0]][soloonFence.left[1]] ===
+              Emoji.planet ||
+            theGrid[soloonFence.cornerBottomLeft[0]][
+              soloonFence.cornerTopLeft[1]
+            ] === Emoji.planet) &&
+          countSolInTheGrid <= countSol
 
         //console.log("soloonFence", soloonFence)
         if (conditionsForSoloons) {
