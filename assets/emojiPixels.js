@@ -1,4 +1,4 @@
-const milky = "\u{1F30C}"
+const milky = "🌑" //"\u{1F30C}"
 const planet = "\u{1FA90}"
 
 const purple = "🟣" //"\u{1F7E3}"
